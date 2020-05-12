@@ -12,13 +12,13 @@ php-container:
 php:
 	- sudo docker-compose run php sh
 install:
-	- sudo docker-compose run npm install
-	- sudo docker-compose run npm run dev
-	- sudo docker-compose run composer composer install
-	- sudo docker-compose run php php artisan config:cache
 	- sudo docker-compose up -d
+	- sudo docker-compose run npm install
+	- sudo docker-compose run composer composer install
+	- sudo docker-compose run npm run dev
 	- sudo docker-compose run php php artisan migrate 
 	- sudo docker-sompose run php php artisan db:seed
+	- sudo docker-compose run php php artisan config:cache
 	- sudo docker-compose run npm run watch
 stop: 
 	- sudo docker stop
