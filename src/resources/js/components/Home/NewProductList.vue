@@ -23,8 +23,6 @@
         mounted() {
             axios.get('/api/new-product').then (response=>{
                 this.products = response.data;
-                console.log(this.products);
-                console.log('sss');
             })
         }
     }

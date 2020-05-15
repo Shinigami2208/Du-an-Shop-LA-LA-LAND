@@ -46,7 +46,7 @@ Route::resource('/admin/supplier', 'Admin\SupplierController', ['names' => 'admi
 
 // Route role navigator
 Route::get('/admin', 'AdminController@index')->middleware('role:admin')->name('adminDashboard');
-Route::get('/', 'UserController@index')->middleware('role:user')->name('home');
+Route::get('/', 'HomeController@index')->name('home');
 
 Auth::routes();
 

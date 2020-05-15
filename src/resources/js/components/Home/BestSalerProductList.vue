@@ -1,26 +1,19 @@
 <template>
     <div class="container">
         <div class="row justify-content-center">
-            <router-link :to="{name: 'cart'}">Giỏ hàng</router-link>
             <h2>Trang chủ</h2>
-            <Menu></Menu>
             <NewProductList></NewProductList>
-            <div>
-                <router-view></router-view>
-            </div>
             
         </div>
     </div>
 </template>
 
 <script>
-     import Menu from '../General/Menu.vue';
     import NewProductList from './NewProductList.vue';
     export default {
         mounted() {
         },
         components: {
-            Menu,
             NewProductList,
         }
     }

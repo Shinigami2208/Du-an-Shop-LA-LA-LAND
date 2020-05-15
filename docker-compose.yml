@@ -1,7 +1,7 @@
 version: '3'
 
 networks:
-  project:
+  lalaland:
 
 services:
   nginx:
@@ -17,7 +17,7 @@ services:
       - php
       - mysql
     networks:
-      - project
+      - lalaland
 
   mysql:
     image: mysql:5.7.22
@@ -34,7 +34,7 @@ services:
       SERVICE_TAGS: dev
       SERVICE_NAME: mysql
     networks:
-      - project
+      - lalaland
 
   php:
     build:
@@ -46,7 +46,7 @@ services:
     ports:
       - "9000:9000"
     networks:
-      - project
+      - lalaland
 
   composer:
     image: composer:latest
@@ -57,7 +57,7 @@ services:
     depends_on:
       - php
     networks:
-      - project
+      - lalaland
 
   npm:
     image: node:13.7
