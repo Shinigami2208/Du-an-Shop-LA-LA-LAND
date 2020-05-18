@@ -24,6 +24,10 @@
         "vue-template-compiler": "^2.6.10"
     },
     "dependencies": {
-        "vue-router": "^3.1.6"
+        "@fortawesome/fontawesome-free": "^5.13.0",
+        "vue-gallery": "^2.0.1",
+        "vue-gallery-slideshow": "^1.5.0",
+        "vue-router": "^3.1.6",
+        "vue-runtime-helpers": "^1.1.2"
     }
 }

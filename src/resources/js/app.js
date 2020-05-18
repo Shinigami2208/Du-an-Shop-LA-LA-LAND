@@ -19,7 +19,8 @@ import HomeIndex from './components/Home/HomeIndex.vue';
 import AboutIndex from './components/About/AboutIndex.vue';
 import BlogIndex from './components/Blog/BlogIndex.vue';
 import ContactIndex from './components/Contact/ContactIndex.vue';
-import Cart from './components/General/Cart.vue';
+import CartIndex from './components/Cart/CartIndex.vue';
+import DetailProductIndex from './components/DetailProduct/DetailProductIndex.vue';
 
 const router = new VueRouter({
     mode: 'history',
@@ -28,13 +29,6 @@ const router = new VueRouter({
             path: '/',
             name: 'home',
             component: HomeIndex,
-            children: [
-                {
-                    path: '/cart',
-                    name: 'cart',
-                    component: Cart,
-                },
-            ]
         },
         {
             path: '/about',
@@ -50,6 +44,18 @@ const router = new VueRouter({
             path: '/contact',
             name: 'contact',
             component: ContactIndex,
+        },
+        {
+            path: '/:product_link',
+            name: 'detail_product',
+            component: DetailProductIndex,
+            params: true,
+            props: 'product',
+        },
+        {
+            path: '/cart',
+            name: 'cart',
+            component: CartIndex,
         },
     ]
 });
@@ -70,9 +76,6 @@ Vue.prototype._ = require('lodash');
 
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
-
-Vue.component('hot-product-list', require('./components/Home/NewProductList.vue').default);
-Vue.component('menu', require('./components/General/Menu.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

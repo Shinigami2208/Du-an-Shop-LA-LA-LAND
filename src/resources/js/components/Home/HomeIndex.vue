@@ -1,27 +1,45 @@
 <template>
-    <div class="container">
-        <div class="row justify-content-center">
-            <router-link :to="{name: 'cart'}">Giỏ hàng</router-link>
-            <h2>Trang chủ</h2>
-            <Menu></Menu>
-            <NewProductList></NewProductList>
-            <div>
-                <router-view></router-view>
-            </div>
-            
-        </div>
+    <div>
+        <Banner />
+        <FeaturePhotos />
+        <PromotionProductList />
+        <BestSalerProductList />
+        <NewProductList />
+        <FeatureBrandList />
+        <LatestBlog />
+        <ServiceList />
+        <Footer />
+        <router-view></router-view>
     </div>
 </template>
 
 <script>
-     import Menu from '../General/Menu.vue';
+    import Banner from '../General/Banner.vue';
+    import FeaturePhotos from '../General/FeaturePhotos.vue';
     import NewProductList from './NewProductList.vue';
+    import PromotionProductList from './PromotionProductList.vue';
+    import BestSalerProductList from './BestSalerProductList.vue';
+    import FeatureBrandList from './FeatureBrandList.vue';
+    import LatestBlog from './LatestBlog.vue';
+    import ServiceList from '../General/ServiceList.vue';
+    import Footer from '../General/Footer.vue';
     export default {
         mounted() {
         },
         components: {
-            Menu,
+            Banner,
             NewProductList,
+            FeaturePhotos,
+            PromotionProductList,
+            BestSalerProductList,
+            FeatureBrandList,
+            LatestBlog,
+            ServiceList,
+            Footer
+
         }
     }
 </script>
+<style scoped>
+    
+</style>

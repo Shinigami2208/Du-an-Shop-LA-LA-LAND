@@ -1,0 +1,78 @@
+<template>
+    <div class="cart-modal">
+        <table class="table">
+            <thead>
+                <tr>
+                <th scope="col" width="25%"></th>
+                <th scope="col" width="75%"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <CartModalItem v-for="cart in carts" :key="cart.id" :cart="cart" />
+                <tr>
+                    <td colspan="2">
+                        <router-link :to="{name: 'cart'}"  class="btn-view-cart">Xem Giỏ Hàng</router-link>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</template>
+
+<script>
+import CartModalItem from './CartModalItem.vue';
+export default {
+    data(){
+        return {
+            carts: [],
+        }
+    },
+    components: {
+        CartModalItem
+    },
+    mounted(){
+        this.eventBus.$on('addToCart', (product) => {
+            if(this.carts.indexOf(product) !== -1){
+                window.alert('Sản Phẩm Đã Có Trong Giỏ Hàng');
+            }else{
+                this.carts.push(product);
+            }
+        });
+    },
+}
+</script>
+
+<style scoped>
+.cart-modal{
+    width: 280px;
+    height: 350px;
+    background-color: aliceblue;
+    position: absolute;
+    margin-left: -220px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    text-align: left;
+    border: 1px solid yellowgreen;
+    border-radius: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.btn-view-cart{
+    background-color:yellowgreen ;
+    display: block;
+    color: white;
+    padding-bottom: 8px;
+    padding-top: 8px;
+    width: 100px;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 5px;
+}
+
+.btn-view-cart:hover{
+    opacity: 0.8;
+    text-decoration: none;
+}
+
+</style>
