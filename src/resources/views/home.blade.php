@@ -98,6 +98,21 @@
                     display: flex;
                     flex-direction: column;
                     align-items: center;
+                    margin-bottom: 20px;
+                    transition: all 0.3s;
+                    border-radius: 5px;
+                    width: 100%;
+                }
+
+                .home-product-list-item:hover{
+                    transform: translateY(-5px);
+                    border-top: 1px solid gray;
+                    border-right: 1px solid gray;
+                    box-shadow: 2px -2px 5px;
+                }
+
+                .home-product-list-item:hover .btn-view-add-to-cart{
+                    display: block;
                 }
 
                 .home-product-list-item:last-child{
@@ -109,9 +124,37 @@
                     width: 100%;
                     background-size: cover;
                     cursor: pointer;
-                    margin: 5px;
                     border-radius: 3px;
                     object-fit: contain;
+                    
+                }
+                /* btn Add to Cart */
+                .contain-add-to-cart{
+                    position: relative;
+                    display: flex;
+                    justify-content: center;
+                }
+
+                .btn-view-add-to-cart{
+                    background-color:#999 ;
+                    display: none;
+                    color: white;
+                    padding-bottom: 5px;
+                    padding-top: 5px;
+                    width: 50px;
+                    font-size: 1.2rem;
+                    text-align: center;
+                    border-radius: 5px;
+                    margin-top: 40px;
+                    position: absolute;
+                    bottom: 100%;
+                    border: none;
+                    transition: display 0.3s ease-in-out;
+                }
+
+                .btn-view-add-to-cart:hover{
+                    color: white;
+                    background-color: #c8b560;
                 }
         </style>
 

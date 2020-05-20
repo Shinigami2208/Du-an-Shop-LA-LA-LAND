@@ -9,7 +9,7 @@
         <LatestBlog />
         <ServiceList />
         <Footer />
-        <router-view></router-view>
+        <AlertAddProductToCart />
     </div>
 </template>
 
@@ -23,6 +23,7 @@
     import LatestBlog from './LatestBlog.vue';
     import ServiceList from '../General/ServiceList.vue';
     import Footer from '../General/Footer.vue';
+    import AlertAddProductToCart from '../General/AlertAddProductToCart.vue';
     export default {
         mounted() {
         },
@@ -35,11 +36,12 @@
             FeatureBrandList,
             LatestBlog,
             ServiceList,
-            Footer
+            Footer,
+            AlertAddProductToCart
 
         }
     }
 </script>
 <style scoped>
-    
+   
 </style>

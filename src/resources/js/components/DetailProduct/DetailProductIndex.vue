@@ -21,9 +21,10 @@
     import ProductRelate from './ProductRelate.vue';
     import ProductViewed from './ProductViewed.vue';
     export default {
-        props: ['product_id'],
+        props: ['product'],
         mounted() {
-            console.log(this.product_id);
+            console.log(this.$route.params);
+            console.log(this.props);
         },
         components: {
             Banner,

@@ -25,6 +25,7 @@ export default {
     data(){
         return {
             carts: [],
+            isExist: null
         }
     },
     components: {
@@ -33,12 +34,23 @@ export default {
     mounted(){
         this.eventBus.$on('addToCart', (product) => {
             if(this.carts.indexOf(product) !== -1){
-                window.alert('Sản Phẩm Đã Có Trong Giỏ Hàng');
+                this.showAlertSuccessAddToCart();
             }else{
                 this.carts.push(product);
+                this.showAlertWarnAddToCart();
             }
         });
     },
+    methods: {
+        showAlertSuccessAddToCart(){
+            this.isExist = true;
+            this.eventBus.$emit('showAlertSuccessAddToCart', this.isExist);
+        },
+        showAlertWarnAddToCart(){
+            this.isExist = false;
+            this.eventBus.$emit('showAlertWarnAddToCart', this.isExist)
+        }
+    }
 }
 </script>
 
@@ -48,7 +60,6 @@ export default {
     height: 350px;
     background-color: aliceblue;
     position: absolute;
-    margin-left: -220px;
     overflow: hidden;
     transition: all 0.3s ease;
     text-align: left;
@@ -56,6 +67,7 @@ export default {
     border-radius: 10px;
     padding-left: 20px;
     padding-right: 20px;
+    right: -100%;
 }
 
 .btn-view-cart{

@@ -56,13 +56,13 @@ export default {
     },
     mounted(){
         this.caculateTotalPay();
-        this.eventBus.$on('addToCart', (product) => {
-            if(this.carts.indexOf(product) !== -1){
-                window.alert('Sản Phẩm Đã Có Trong Giỏ Hàng');
-            }else{
-                this.carts.push(product);
-            }
-        });
+        // this.eventBus.$on('addToCart', (product) => {
+        //     if(this.carts.indexOf(product) !== -1){
+        //         window.alert('Sản Phẩm Đã Có Trong Giỏ Hàng');
+        //     }else{
+        //         this.carts.push(product);
+        //     }
+        // });
     },
     watch: {
         carts: {
