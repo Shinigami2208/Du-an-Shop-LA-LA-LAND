@@ -39,10 +39,7 @@ class ProductController extends Controller
     public function create()
     {
         //
-        return view(
-            'admin.product.create',
-            ['categories' => Category::all()]
-        );
+        return view('admin.product.create', ['categories' => Category::all()] );
     }
 
     /**
@@ -78,14 +75,7 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        //
-        return view (
-            'admin.product.edit',
-            [ 
-                'product' => Product::findOrFail($id),
-                'categories' => Category::all(),
-            ]
-            );
+        return view('admin.product.edit', ['product' => Product::findOrFail($id), 'categories' => Category::all(),]);
     }
 
     /**
@@ -101,7 +91,7 @@ class ProductController extends Controller
         Product::find($id)->update($request->all());
         // CategoryProduct::find();
 
-        return redirect()->route('adminProduct.index');
+        return redirect()->back();
     }
 
     /**
@@ -121,13 +111,6 @@ class ProductController extends Controller
     }
 
     public function deleteForm(Request $request, $id){
-        return view
-        (
-            'admin.product.delete', 
-            [
-                'product' => Product::find($id),
-                'id' => $id
-            ]
-        );
+        return view('admin.product.delete', ['product' => Product::find($id), 'id' => $id]);
     }
 }

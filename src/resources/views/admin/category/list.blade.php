@@ -12,7 +12,6 @@
         <div class="card">
             <div class="card-header">
             <div class="card-tools">
-                <!-- <a href="{{route('adminCategory.create')}}" class="btn btn-block btn-default"><i class="fa fa-plus" aria-hidden="true"></i> Thêm Danh Mục</a> -->
                 <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-create">
                     <i class="fa fa-plus" aria-hidden="true"></i> Thêm Danh Mục
                 </button>
@@ -80,7 +79,7 @@
                                 <label for="description">Miêu tả</label>
                                 <textarea class="form-control" rows="3" name="description" id="description" placeholder="Mieu ta..."></textarea>
                             </div>
-                            
+
                         </div>
                         <!-- /.card-body -->
 
@@ -104,6 +103,6 @@
 
 @section('js')
     <script>
-        
+
     </script>
 @stop

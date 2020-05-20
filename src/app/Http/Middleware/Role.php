@@ -19,7 +19,7 @@ class Role
         if(!Auth::user()){
             return redirect()->route('login');
         }
-        if((Auth::user()->role->name != $role) ||  Auth::user()->role->name == 'user'){
+        if((Auth::user()->role->name != $role) ||  Auth::user()->role->name == 'khach'){
             return redirect()->route('home');
         }
         return $next($request);

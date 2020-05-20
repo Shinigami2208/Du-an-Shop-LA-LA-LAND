@@ -17,7 +17,6 @@ class Product extends Model
         'status',
         'unit_price'
     ];
-
     public function categories(){
         return $this->belongsToMany('App\Models\Category', 'category_product');
     }

@@ -13,12 +13,22 @@ class CreateCategoriesTable extends Migration
      */
     public function up()
     {
+        Schema::dropIfExists('categories');
         Schema::create('categories', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name');
+            $table->string('name')->unique();
+            $table->integer('parent_category')->default(0);
             $table->string('description');
             $table->timestamps();
         });
+        $data = [
+            ["id"=>1,'name'=>"piano",'description'=>"dep",'created_at'=>new DateTime(),'updated_at'=>new DateTime()],
+            ["id"=>2,'name'=>"guitar",'description'=>"dep",'created_at'=>new DateTime(),'updated_at'=>new DateTime()],
+            ["id"=>3,'name'=>"sacsophon",'description'=>"dep",'created_at'=>new DateTime(),'updated_at'=>new DateTime()],
+            ["id"=>4,'name'=>"ken",'description'=>"dep",'created_at'=>new DateTime(),'updated_at'=>new DateTime()],
+
+        ];
+        DB::table('categories')->insert($data);
     }
 
     /**

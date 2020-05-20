@@ -27,31 +27,33 @@ Route::get('/login-facebook', function(){
 })->name('loginFacebook');
 Route::get('/facebook-callback', 'Auth\SocialAuthController@loginFacebookCallback')->name('facebookCallback');
 
-// Admin Category
-Route::resource('/admin/category', 'Admin\CategoryController', ['names' => 'adminCategory'])->middleware('role:admin');
-Route::get('/admin/category/delete/{id}', 'Admin\CategoryController@deleteForm')->name('adminCategoryDeleteForm');
+Route::group(['prefix'=>'admin'], function (){
 
-// Admin Product
-Route::resource('/admin/product', 'Admin\ProductController', ['names' => 'adminProduct'])->middleware('role:admin');
-Route::get('/admin/product/delete/{id}', 'Admin\ProductController@deleteForm')->name('adminProductDeleteForm');
+    Route::group(['prefix'=>'category'], function (){
+        Route::resource('/', 'Admin\CategoryController', ['names'=> 'adminCategory']);
+        Route::get('delete/{id}', 'Admin\CategoryController@deleteForm')->name('adminCategoryDeleteForm');
+    });
 
-// Admin Image
-Route::resource('/admin/image', 'Admin\ImageController', ['names' => 'adminImage'])->middleware('role:admin');
+    Route::group(['prefix'=>'product'], function (){
+        Route::resource('/', 'Admin\ProductController', ['names' => 'adminProduct']);
+        Route::get('/delete/{id}', 'Admin\ProductController@deleteForm')->name('adminProductDeleteForm');
+    });
 
-// Admin Brand
-Route::resource('/admin/brand', 'Admin\BrandController', ['names' => 'adminBrand'])->middleware('role:admin');
+    Route::group(['prefix'=>'image'], function(){
+        Route::resource('/', 'Admin\ImageController', ['names' => 'adminImage']);
+    });
 
-// Admin Supplier
-Route::resource('/admin/supplier', 'Admin\SupplierController', ['names' => 'adminSupplier'])->middleware('role:admin');
+    Route::group(['prefix'=>'brand'], function (){
+        Route::resource('/', 'Admin\BrandController', ['names' => 'adminBrand']);
+    });
+
+    Route::group(['prefix'=>'supplier'], function (){
+        Route::resource('/', 'Admin\SupplierController', ['names' => 'adminSupplier']);
+    });
+});
 
 // Route role navigator
 Route::get('/admin', 'AdminController@index')->middleware('role:admin')->name('adminDashboard');
 Route::get('/', 'HomeController@index')->name('home');
 
 Auth::routes();
-
-
-
-Route::get('/{url}', function () {
-    return view('home');
-})->where('url', '[A-Za-z0-9\-]+');
