@@ -1,9 +1,9 @@
 <template>
     <div class="detail-product-gallery">
         <div class="gallery">
-            <img class="image" v-for="(image, i) in images" :src="image" :key="i" @mouseover="changeFeaturePhoto(image)">
-            <!-- <img class="image" v-for="(image, i) in images" :src="image" :key="i" @click="index = i" @mouseover="changeFeaturePhoto(image)"> -->
-            <!-- <vue-gallery-slideshow :images="images" :index="index" @close="index = null" ></vue-gallery-slideshow> -->
+            <!-- <img class="image" v-for="(image, i) in images" :src="image" :key="i" @mouseover="changeFeaturePhoto(image)"> -->
+            <img class="image" v-for="(image, i) in images" :src="image" :key="i" @click="index = i" @mouseover="changeFeaturePhoto(image)">
+            <vue-gallery-slideshow :images="images" :index="index" @close="index = null" ></vue-gallery-slideshow>
         </div>
         <img class="feature-photo" :src="featurePhoto" />
     </div>

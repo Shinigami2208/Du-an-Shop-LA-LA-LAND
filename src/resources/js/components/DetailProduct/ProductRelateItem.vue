@@ -1,42 +1,41 @@
 <template>
-    <div class="product-relate">
-        <router-link :to="{name: 'detail_product'}" class="product-relate-photo"></router-link>
-        <div class="detail_product-name">Ducati Aventado</div>
-        <div class="detail_product-price">$100.00</div>
-        <div class="detail_product-star">
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
+    <div>
+        <div class="home-product-list-item">
+            <router-link :to="{name: 'detail_product', params: {product_slug: this.rewriteUrl(product.name)}, props: ['product']}" class="router-link-to-product-detail">
+                <img :src="product.src" alt="product" class="home-product-list-item-photo" >
+            </router-link>
+            <div class="contain-add-to-cart">
+                <button  class="btn-view-add-to-cart" @click.stop="addToCart(product)"><i class="fas fa-cart-plus"></i></button>
+                <div class="home-product-list-item-name">{{product.name}}</div>
+            </div>
+            <div class="home-product-list-item-price">{{product.price}}</div>
+            <div class="home-product-list-item-star">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+            </div>
         </div>
     </div>
 </template>
 
 <script>
-
-    export default {
-        mounted() {
-        },
-        components: {
+export default {
+    data(){
+        return {
             
         }
+    },
+    props: ['product'],
+    methods: {
+        addToCart(product){
+            this.eventBus.$emit('addToCart', product);
+        }
     }
+}
 </script>
-<style scoped>
-.product-relate{
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
 
-.product-relate-photo{
-    background-image: url('https://i.pinimg.com/564x/c2/2c/7a/c22c7a6f3a787c165c071979cbbd7991.jpg');
-    background-size: cover;
-    background-position: center center;
-    height: 200px;
-    width: 100%;
-}
+<style scoped>
     
 </style>

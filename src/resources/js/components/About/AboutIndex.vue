@@ -1,23 +1,19 @@
 <template>
     <div class="container">
+        <DropdownMenu />
         <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">Về chúng tôi</div>
-
-                    <div class="card-body">
-                        About
-                    </div>
-                </div>
-            </div>
+             <FormFlipping />
         </div>
     </div>
 </template>
 
 <script>
+    import DropdownMenu from './DropdownMenu.vue';
+    import FormFlipping from './FormFlipping.vue';
     export default {
-        mounted() {
-            console.log('Component mounted.')
+        components: {
+            DropdownMenu,
+            FormFlipping
         }
     }
 </script>

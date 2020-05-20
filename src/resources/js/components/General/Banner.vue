@@ -9,13 +9,26 @@
             </ul>
             <div class="icon">
                 <div class="icon-item icon-item-cart" @mouseover="isShowCartModal = true" @mouseleave.stop="isShowCartModal = false">
-                    <a>
+                    <router-link :to="{name: 'cart'}">
                         <i class="fas fa-shopping-cart"></i>
-                    </a>
+                    </router-link>
                     <CartModal v-show="isShowCartModal==true" />
                 </div>
-                 <div class="icon-item"><a><i class="far fa-heart"></i></a></div>
-                  <div class="icon-item"><a><i class="far fa-user"></i></a></div>
+                <div class="icon-item"><a><i class="far fa-heart"></i></a></div>
+                 <div class="icon-item icon-item-account">
+                     <router-link :to="{name: 'profile'}"><i class="far fa-user"></i></router-link>
+                     <ul class="account-dropdown">
+                         <li>
+                            <router-link :to="{name: 'profile'}">Tài Khoản Của Tôi</router-link>
+                        </li>
+                         <li>
+                            <router-link :to="{name: 'order'}">Đơn Mua</router-link>
+                        </li>
+                         <li>
+                            <a href="#">Đăng Xuất</a>
+                        </li>
+                     </ul>
+                </div>
             </div>
         </div>
         <div id="filter-search" class="container-flex">
@@ -153,5 +166,43 @@ export default {
 .icon-item-cart{
     position: relative;
 }
+
+/* Account Modal */
+.icon-item-account{
+    position: relative;
+}
+.account-dropdown a:hover{
+    text-decoration: none;
+    opacity: 0.7;
+}
+
+.account-dropdown a{
+    color: black;
+}
+
+.account-dropdown{
+    width: 120px;
+    height: 75px;
+    background-color: aliceblue;
+    position: absolute;
+    overflow: hidden;
+    text-align: left;
+    border: 1px solid yellowgreen;
+    border-radius: 10px;
+    padding-left: 5px;
+    padding-right: 5px;
+    right: -100%;
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: column;
+    transition: all 0.3s ease-out;
+    display: none;
+}
+
+.icon-item-account:hover .account-dropdown{
+    display: block;
+}
+
+
 
 </style>

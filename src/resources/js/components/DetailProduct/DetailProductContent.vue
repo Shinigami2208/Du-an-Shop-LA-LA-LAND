@@ -12,7 +12,7 @@
         </div>
         <div class="product-price">12.000.000đ</div>
         <div class="product-information">Đàn Piano Điện Casio AE-550M là một sản phẩm vô cùng độc đáo trong dòng sản phẩm Celviano của hàng piano Casio nổi tiếng Nhật Bản. Ngoài việc thừa hưởng các tính năng cơ bản và âm thanh vượt trội của dòng sản phẩm Celviano, AE-550M còn sở hữu một ngoài hình và thiết kế độc đáo hứa hẹn sẽ đem lại cho bạn một cây piano ưng ý trong tầm giá.</div>
-        <span  class="btn-view-add-to-cart">Thêm Vào Giỏ Hàng</span>
+        <span  class="btn-view-add-to-cart-type-1">Thêm Vào Giỏ Hàng</span>
     </div>
 </template>
 
@@ -42,7 +42,7 @@ export default {
         margin-bottom: 20px;
     }
 
-    .btn-view-add-to-cart{
+    .btn-view-add-to-cart-type-1{
         background-color:yellowgreen ;
         display: block;
         color: white;

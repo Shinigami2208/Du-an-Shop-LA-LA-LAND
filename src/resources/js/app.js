@@ -21,6 +21,9 @@ import BlogIndex from './components/Blog/BlogIndex.vue';
 import ContactIndex from './components/Contact/ContactIndex.vue';
 import CartIndex from './components/Cart/CartIndex.vue';
 import DetailProductIndex from './components/DetailProduct/DetailProductIndex.vue';
+import AccountIndex from './components/Account/AccountIndex.vue';
+import AccountProfile from './components/Account/AccountProfile.vue';
+import AccountOrder from './components/Account/AccountOrder.vue';
 
 const router = new VueRouter({
     mode: 'history',
@@ -46,16 +49,33 @@ const router = new VueRouter({
             component: ContactIndex,
         },
         {
-            path: '/:product_link',
-            name: 'detail_product',
-            component: DetailProductIndex,
-            params: true,
-            props: 'product',
-        },
-        {
             path: '/cart',
             name: 'cart',
             component: CartIndex,
+        },
+        {
+            path: '/account',
+            name: 'account',
+            component: AccountIndex,
+            children:[
+                {
+                    path:'/profile',
+                    name:'profile',
+                    component: AccountProfile
+                }, 
+                {
+                    path:'/order',
+                    name:'order',
+                    component: AccountOrder
+                }, 
+            ]
+        },
+        {
+            path: '/:product_slug:product_id',
+            name: 'detail_product',
+            component: DetailProductIndex,
+            params: true,
+            props: true,
         },
     ]
 });
@@ -65,6 +85,39 @@ Vue.prototype.eventBus = new Vue();
 
 // Lodash
 Vue.prototype._ = require('lodash');
+// Rewrite-URL
+Vue.prototype.rewriteUrl = function rewriteUrl(title){
+    var slug = "";
+    // Change to lower case
+    var titleLower = title.toLowerCase();
+    // Letter "e"
+    slug = titleLower.replace(/e|é|è|ẽ|ẻ|ẹ|ê|ế|ề|ễ|ể|ệ/gi, 'e');
+    // Letter "a"
+    slug = slug.replace(/a|á|à|ã|ả|ạ|ă|ắ|ằ|ẵ|ẳ|ặ|â|ấ|ầ|ẫ|ẩ|ậ/gi, 'a');
+    // Letter "o"
+    slug = slug.replace(/o|ó|ò|õ|ỏ|ọ|ô|ố|ồ|ỗ|ổ|ộ|ơ|ớ|ờ|ỡ|ở|ợ/gi, 'o');
+    // Letter "u"
+    slug = slug.replace(/u|ú|ù|ũ|ủ|ụ|ư|ứ|ừ|ữ|ử|ự/gi, 'u');
+    // Letter "i"
+    slug = slug.replace(/ị|ỉ|ì|í|ĩ/gi, 'i');
+    // Letter "y"
+    slug = slug.replace(/ý|ỷ|ỳ|ỵ|ỹ/gi, 'y');
+    // Letter "d"
+    slug = slug.replace(/đ/gi, 'd');
+    // Trim the last whitespace
+    slug = slug.replace(/\s*$/g, '');
+    // Change whitespace to "-"
+    slug = slug.replace(/\s+/g, '-');
+    
+    return slug.toUpperCase();
+}
+
+//  Filter
+
+Vue.filter('dinhDangTien', function(soTien, phanCach){
+    return soTien.toString().replace(/\B(?=(\d{3})+(?!\d))/g, phanCach) + 'đ';
+});
+
 
 /**
  * The following block of code may be used to automatically register your
