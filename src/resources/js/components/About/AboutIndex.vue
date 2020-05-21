@@ -1,19 +1,27 @@
 <template>
-    <div class="container">
-        <DropdownMenu />
-        <div class="row justify-content-center">
-             <FormFlipping />
-        </div>
+    <div>
+        <Banner />
+        <ProductInforBanner />   
+        <ServiceList />
+        <Footer />
     </div>
 </template>
 
 <script>
-    import DropdownMenu from './DropdownMenu.vue';
-    import FormFlipping from './FormFlipping.vue';
-    export default {
-        components: {
-            DropdownMenu,
-            FormFlipping
-        }
+import Banner from '../General/Banner';
+import ProductInforBanner from '../General/ProductInforBanner';
+import ServiceList from '../General/ServiceList';
+import Footer from '../General/Footer';
+export default {
+    components: {
+        Banner,
+        ProductInforBanner,
+        ServiceList,
+        Footer
     }
+}
 </script>
+
+<style>
+
+</style>
