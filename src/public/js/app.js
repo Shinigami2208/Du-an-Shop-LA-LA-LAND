@@ -24357,7 +24357,7 @@ var render = function() {
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "home-product-list-item-price" }, [
-          _vm._v(_vm._s(_vm.product.price))
+          _vm._v(_vm._s(_vm._f("dinhDangTien")(_vm.product.price, ".")))
         ]),
         _vm._v(" "),
         _vm._m(0)
@@ -24874,7 +24874,7 @@ var render = function() {
         _vm._v(_vm._s(_vm.cart.name))
       ]),
       _vm._v(" "),
-      _c("div", [_vm._v(_vm._s(_vm.cart.price))])
+      _c("div", [_vm._v(_vm._s(_vm._f("dinhDangTien")(_vm.cart.price, ".")))])
     ])
   ])
 }
@@ -25711,7 +25711,7 @@ var render = function() {
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "home-product-list-item-price" }, [
-          _vm._v(_vm._s(_vm.product.price))
+          _vm._v(_vm._s(_vm._f("dinhDangTien")(_vm.product.price, ".")))
         ]),
         _vm._v(" "),
         _vm._m(0)
@@ -25891,7 +25891,7 @@ var render = function() {
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "home-product-list-item-price" }, [
-          _vm._v(_vm._s(_vm.product.price))
+          _vm._v(_vm._s(_vm._f("dinhDangTien")(_vm.product.price, ".")))
         ]),
         _vm._v(" "),
         _vm._m(0)
@@ -41454,7 +41454,7 @@ Vue.prototype.rewriteUrl = function rewriteUrl(title) {
 
 
 Vue.filter('dinhDangTien', function (soTien, phanCach) {
-  return soTien.toString().replace(/\B(?=(\d{3})+(?!\d))/g, phanCach) + 'đ';
+  return soTien.toString().replace(/\B(?=(\d{3})+(?!\d))/g, phanCach) + '₫';
 });
 /**
  * The following block of code may be used to automatically register your

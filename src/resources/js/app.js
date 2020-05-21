@@ -48,7 +48,7 @@ Vue.prototype.rewriteUrl = function rewriteUrl(title){
 //  Filter
 
 Vue.filter('dinhDangTien', function(soTien, phanCach){
-    return soTien.toString().replace(/\B(?=(\d{3})+(?!\d))/g, phanCach) + 'đ';
+    return soTien.toString().replace(/\B(?=(\d{3})+(?!\d))/g, phanCach) + '₫';
 });
 
 
