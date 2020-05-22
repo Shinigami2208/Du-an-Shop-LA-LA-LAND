@@ -17,13 +17,13 @@ class CreateProductsTable extends Migration
             $table->bigIncrements('id');
             $table->integer('brand_id');
             $table->integer('supplier_id');
-            $table->integer('category_id');
+            $table->integer('category_id')->unsigned();
             $table->string('name');
             $table->string('description');
             $table->String('quality');
             $table->integer('status')->default(1);
             $table->integer('unit_price');
-            $table->integer('promotion_price')->nullable();
+            $table->integer('promotion_price');
             $table->timestamps();
         });
     }

@@ -41746,7 +41746,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_0__["default"]({
       component: _components_Account_AccountOrder_vue__WEBPACK_IMPORTED_MODULE_9__["default"]
     }]
   }, {
-    path: '/:product_slug:product_id',
+    path: '/:product_slug.:product_id',
     name: 'detail_product',
     component: _components_DetailProduct_DetailProductIndex_vue__WEBPACK_IMPORTED_MODULE_6__["default"],
     params: true,

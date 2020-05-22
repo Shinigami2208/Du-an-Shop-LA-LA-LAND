@@ -44,12 +44,12 @@ export default {
                     path:'/profile',
                     name:'profile',
                     component: AccountProfile
-                }, 
+                },
                 {
                     path:'/order',
                     name:'order',
                     component: AccountOrder
-                }, 
+                },
             ]
         },
         {

@@ -62,16 +62,16 @@ const router = new VueRouter({
                     path:'/profile',
                     name:'profile',
                     component: AccountProfile
-                }, 
+                },
                 {
                     path:'/order',
                     name:'order',
                     component: AccountOrder
-                }, 
+                },
             ]
         },
         {
-            path: '/:product_slug:product_id',
+            path: '/:product_slug.:product_id',
             name: 'detail_product',
             component: DetailProductIndex,
             params: true,
@@ -108,7 +108,7 @@ Vue.prototype.rewriteUrl = function rewriteUrl(title){
     slug = slug.replace(/\s*$/g, '');
     // Change whitespace to "-"
     slug = slug.replace(/\s+/g, '-');
-    
+
     return slug.toUpperCase();
 }
 

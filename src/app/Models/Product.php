@@ -6,19 +6,19 @@ use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
-    //
-    protected $fillable = [
+    protected $table ='products';
+    protected $fillable =[
         'name',
         'brand_id',
         'supplier_id',
-        'promotion_price',
+        'category_id',
         'description',
-        'detail_description',
-        'status',
-        'unit_price'
-    ];
-    public function categories(){
-        return $this->belongsToMany('App\Models\Category', 'category_product');
+        'quality',
+        'unit_price',
+        'promotion_price'
+        ];
+    public function category(){
+        return $this->belongsTo('App\Models\Category','category_id','id');
     }
 
     public function comments(){

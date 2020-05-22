@@ -22,31 +22,21 @@
                 <table class="table">
                     <thead>
                     <tr>
-                        <th style="width: 10%">STT</th>
-                        <th style="width: 60%">Tên Danh Mục</th>
-                        <th style="width: 10%"></th>
-                        <th style="width: 10%"></th>
-                        <!-- <th style="width: 10%"></th> -->
+                        <th>STT</th>
+                        <th>Tên Danh Mục</th>
+                        <th>action</th>
                     </tr>
                     </thead>
                     <tbody>
                     @foreach ($categories as $key => $category)
                         <tr>
-                            <td>{{$key + 1}}</td>
-                            <td>{{$category->name}}</td>
-                            <td><a href="{{route('adminCategory.show', [$category->id] )}}" class="btn btn-block btn-default">Chi tiết</a></td>
-                            <td><a href="{{route('adminCategory.edit', [$category->id] )}}" class="btn btn-block btn-default">Sửa</a></td>
-                            <td><a href="{{route('adminCategoryDeleteForm', [$category->id])}}" class="btn btn-block btn-default">Xóa</a></td>
-                            <!-- <td>
-                                <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-edit" data-category_id="{{ $category->id }}">
-                                    Sửa
-                                </button>
-                            </td>
+                            <td>{{ $key + 1 }}</td>
+                            <td>{{ $category->name }}</td>
                             <td>
-                                <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-delete">
-                                    Xóa
-                                </button>
-                            </td> -->
+                                <a href="{{ route('adminCategory.show', [$category->id] ) }}"><button class="btn btn-default">Chi tiết</button></a>
+                                <a href="{{ route('adminCategory.edit', [$category->id] )}}"><button class="btn btn-default">Sửa</button></a>
+                                <a href="{{ route('adminCategoryDeleteForm', $category->id) }}"><button class="btn btn-default">Xóa</button></a>
+                            </td>
                         </tr>
                     @endforeach
                     </tbody>
@@ -68,7 +58,7 @@
                 <div class="card card-primary">
                 <!-- /.card-header -->
                 <!-- form start -->
-                    <form role="form" method="post" action="{{route('adminCategory.store')}}">
+                    <form role="form" method="post" action="{{ route('adminCategory.store') }}">
                         {{csrf_field()}}
                         <div class="card-body">
                             <div class="form-group">
@@ -102,7 +92,5 @@
 @stop
 
 @section('js')
-    <script>
 
-    </script>
 @stop
