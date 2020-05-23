@@ -25,44 +25,47 @@ export default new VueRouter({
             name: 'about',
             component: AboutIndex,
         },
-        {
-            path: '/blog',
-            name: 'blog',
-            component: BlogIndex,
-        },
-        {
-            path: '/contact',
-            name: 'contact',
-            component: ContactIndex,
-        },
-        {
-            path: '/cart',
-            name: 'cart',
-            component: CartIndex,
-        },
-        {
-            path: '/account',
-            name: 'account',
-            component: AccountIndex,
-            children:[
-                {
-                    path:'/profile',
-                    name:'profile',
-                    component: AccountProfile
-                }, 
-                {
-                    path:'/order',
-                    name:'order',
-                    component: AccountOrder
-                }, 
-            ]
-        },
-        {
-            path: '/:product_slug:product_id',
-            name: 'detail_product',
-            component: DetailProductIndex,
-            params: true,
-            props: true,
-        },
-    ]
+        // {
+        //     path: '/blog',
+        //     name: 'blog',
+        //     component: BlogIndex,
+        // },
+        // {
+        //     path: '/contact',
+        //     name: 'contact',
+        //     component: ContactIndex,
+        // },
+        // {
+        //     path: '/cart',
+        //     name: 'cart',
+        //     component: CartIndex,
+        // },
+        // {
+        //     path: '/account',
+        //     name: 'account',
+        //     component: AccountIndex,
+        //     children:[
+        //         {
+        //             path:'/profile',
+        //             name:'profile',
+        //             component: AccountProfile
+        //         }, 
+        //         {
+        //             path:'/order',
+        //             name:'order',
+        //             component: AccountOrder
+        //         }, 
+        //     ]
+        // },
+        // {
+        //     path: '/:product_slug:product_id',
+        //     name: 'detail_product',
+        //     component: DetailProductIndex,
+        //     params: true,
+        //     props: true,
+        // },
+    ],
+    redirect: {
+        '*' : '/'
+    }
   })
