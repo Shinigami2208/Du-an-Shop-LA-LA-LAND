@@ -27,6 +27,7 @@ Route::get('/login-facebook', function(){
 })->name('loginFacebook');
 Route::get('/facebook-callback', 'Auth\SocialAuthController@loginFacebookCallback')->name('facebookCallback');
 
+// route admin
 Route::group(['prefix'=>'admin'], function (){
 
     Route::group(['prefix'=>'category'], function (){
@@ -35,7 +36,10 @@ Route::group(['prefix'=>'admin'], function (){
     });
 
     Route::group(['prefix'=>'product'], function (){
-        Route::resource('/', 'Admin\ProductController', ['names' => 'adminProduct']);
+        Route::get('/', 'Admin\ProductController@index');
+        Route::get('/create','Admin\ProductController@store')->name('adminProduct.store');
+        Route::get('/showEdit/{id}', 'Admin\ProductController@showEdit')->name('Admin.Product.edit');
+        Route::post('/PostEdit/{id}', 'Admin\ProductController@update')->name('Admin.Product.PostEdit');
         Route::get('/delete/{id}', 'Admin\ProductController@deleteForm')->name('adminProductDeleteForm');
     });
 
@@ -52,7 +56,7 @@ Route::group(['prefix'=>'admin'], function (){
     });
 });
 
-// Route role navigator
+// Route login
 Route::get('/admin', 'AdminController@index')->middleware('role:admin')->name('adminDashboard');
 Route::get('/', 'HomeController@index')->name('home');
 

@@ -12,7 +12,6 @@ window.axios = require('axios');
 // Router
 import router from './Router.js';
 
-
 // Event Bus
 Vue.prototype.eventBus = new Vue();
 
@@ -41,7 +40,7 @@ Vue.prototype.rewriteUrl = function rewriteUrl(title){
     slug = slug.replace(/\s*$/g, '');
     // Change whitespace to "-"
     slug = slug.replace(/\s+/g, '-');
-    
+
     return slug.toUpperCase();
 }
 

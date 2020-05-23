@@ -16,19 +16,23 @@ class ProductController extends Controller
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
+     *
      */
+    public function __construct()
+    {
+        $products = Product::all();
+        $categories = Category::all();
+        $brands = Brand::all();
+        $suppliers = Supplier::all();
+        view()->share('products', $products);
+        view()->share('categories', $categories);
+        view()->share('brands', $brands);
+        view()->share('suppliers', $suppliers);
+    }
+
     public function index()
     {
-        //
-        return view(
-            'admin.product.list',
-            [
-                'products' => Product::all(),
-                'categories' => Category::all(),
-                'brands' => Brand::all(),
-                'suppliers' => Supplier::all(),
-            ]
-            );
+        return view('admin.product.list');
     }
 
     /**
@@ -51,9 +55,17 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         //
-        $product = Product::Create($request->all());
-        $product -> categories() -> attach($request->category_id);
-        return redirect()->route('adminProduct.index');
+        $product = Product::Create([
+            'name' => $request->name,
+            'brand_id' => $request->brand_id,
+            'category_id' => $request->category_id,
+            'supplier_id' => $request->supplier_id,
+            'unit_price' => $request->unit_price,
+            'promotion_price' => $request->promotion_price,
+            'description' => $request->description,
+            'quality' => $request->quality,
+        ]);
+        return redirect()->back();
     }
 
     /**
@@ -73,9 +85,15 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    public function showEdit($id){
+        $product = Product::find($id);
+        return view('admin.product.ajax_modal_editProduct', compact('product'));
+    }
     public function edit($id)
     {
-        return view('admin.product.edit', ['product' => Product::findOrFail($id), 'categories' => Category::all(),]);
+        $product = Product::findorFail($id);
+        $categories = Category::all();
+        return view('admin.product.edit', compact('product', 'categories'));
     }
 
     /**
@@ -87,9 +105,7 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
         Product::find($id)->update($request->all());
-        // CategoryProduct::find();
 
         return redirect()->back();
     }
