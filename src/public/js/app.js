@@ -4023,7 +4023,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.product-cart-item-modal-photo[data-v-0357f584]{\n    height: 50px;\n}\n.product-cart-item-name[data-v-0357f584]{\n    text-transform: uppercase;\n}\n", ""]);
+exports.push([module.i, "\n.product-cart-item-modal-photo[data-v-0357f584]{\r\n    height: 50px;\n}\n.product-cart-item-name[data-v-0357f584]{\r\n    text-transform: uppercase;\n}\r\n", ""]);
 
 // exports
 
@@ -41418,6 +41418,17 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODU
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Router_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Router.js */ "./resources/js/Router.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _components_Home_HomeIndex_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/Home/HomeIndex.vue */ "./resources/js/components/Home/HomeIndex.vue");
+/* harmony import */ var _components_About_AboutIndex_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/About/AboutIndex.vue */ "./resources/js/components/About/AboutIndex.vue");
+/* harmony import */ var _components_Blog_BlogIndex_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/Blog/BlogIndex.vue */ "./resources/js/components/Blog/BlogIndex.vue");
+/* harmony import */ var _components_Contact_ContactIndex_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/Contact/ContactIndex.vue */ "./resources/js/components/Contact/ContactIndex.vue");
+/* harmony import */ var _components_Cart_CartIndex_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/Cart/CartIndex.vue */ "./resources/js/components/Cart/CartIndex.vue");
+/* harmony import */ var _components_DetailProduct_DetailProductIndex_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/DetailProduct/DetailProductIndex.vue */ "./resources/js/components/DetailProduct/DetailProductIndex.vue");
+/* harmony import */ var _components_Account_AccountIndex_vue__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/Account/AccountIndex.vue */ "./resources/js/components/Account/AccountIndex.vue");
+/* harmony import */ var _components_Account_AccountProfile_vue__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/Account/AccountProfile.vue */ "./resources/js/components/Account/AccountProfile.vue");
+/* harmony import */ var _components_Account_AccountOrder_vue__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/Account/AccountOrder.vue */ "./resources/js/components/Account/AccountOrder.vue");
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -41427,13 +41438,24 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 
 window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js"); // Router
 
+
+ // import routes from './Routes.js';
+
+
+
+
+
+
+
+
+
  // Event Bus
 
-Vue.prototype.eventBus = new Vue(); // Lodash
+vue__WEBPACK_IMPORTED_MODULE_1___default.a.prototype.eventBus = new vue__WEBPACK_IMPORTED_MODULE_1___default.a(); // Lodash
 
-Vue.prototype._ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js"); // Rewrite-URL
+vue__WEBPACK_IMPORTED_MODULE_1___default.a.prototype._ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js"); // Rewrite-URL
 
-Vue.prototype.rewriteUrl = function rewriteUrl(title) {
+vue__WEBPACK_IMPORTED_MODULE_1___default.a.prototype.rewriteUrl = function rewriteUrl(title) {
   var slug = ""; // Change to lower case
 
   var titleLower = title.toLowerCase(); // Letter "e"
@@ -41459,7 +41481,7 @@ Vue.prototype.rewriteUrl = function rewriteUrl(title) {
 }; //  Filter
 
 
-Vue.filter('dinhDangTien', function (soTien, phanCach) {
+vue__WEBPACK_IMPORTED_MODULE_1___default.a.filter('dinhDangTien', function (soTien, phanCach) {
   return soTien.toString().replace(/\B(?=(\d{3})+(?!\d))/g, phanCach) + '₫';
 });
 /**
@@ -41478,7 +41500,7 @@ Vue.filter('dinhDangTien', function (soTien, phanCach) {
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-var app = new Vue({
+var app = new vue__WEBPACK_IMPORTED_MODULE_1___default.a({
   el: '#app',
   router: _Router_js__WEBPACK_IMPORTED_MODULE_0__["default"]
 });

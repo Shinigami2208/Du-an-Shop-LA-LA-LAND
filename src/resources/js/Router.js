@@ -1,5 +1,5 @@
-import Vue from 'vue';
-import VueRouter from 'vue-router';
+import Vue from 'vue'
+import VueRouter from 'vue-router'
 import HomeIndex from './components/Home/HomeIndex.vue';
 import AboutIndex from './components/About/AboutIndex.vue';
 import BlogIndex from './components/Blog/BlogIndex.vue';
@@ -10,7 +10,7 @@ import AccountIndex from './components/Account/AccountIndex.vue';
 import AccountProfile from './components/Account/AccountProfile.vue';
 import AccountOrder from './components/Account/AccountOrder.vue';
 
-Vue.use(VueRouter);
+Vue.use(VueRouter)
 
 export default new VueRouter({
     mode: 'history',
@@ -44,15 +44,15 @@ export default new VueRouter({
             path: '/account',
             name: 'account',
             component: AccountIndex,
-            children:[
+            children: [
                 {
-                    path:'/profile',
-                    name:'profile',
+                    path: '/profile',
+                    name: 'profile',
                     component: AccountProfile
                 }, 
                 {
-                    path:'/order',
-                    name:'order',
+                    path: '/order',
+                    name: 'order',
                     component: AccountOrder
                 }, 
             ]
@@ -63,6 +63,6 @@ export default new VueRouter({
             component: DetailProductIndex,
             params: true,
             props: true,
-        },
+        },    
     ],
   })
