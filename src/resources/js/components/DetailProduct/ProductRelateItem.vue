@@ -8,7 +8,7 @@
                 <button  class="btn-view-add-to-cart" @click.stop="addToCart(product)"><i class="fas fa-cart-plus"></i></button>
                 <div class="home-product-list-item-name">{{product.name}}</div>
             </div>
-            <div class="home-product-list-item-price">{{product.price}}</div>
+            <div class="home-product-list-item-price">{{product.price | dinhDangTien(".")}}</div>
             <div class="home-product-list-item-star">
                 <i class="fas fa-star"></i>
                 <i class="fas fa-star"></i>

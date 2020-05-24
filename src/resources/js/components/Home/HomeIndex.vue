@@ -15,7 +15,7 @@
 
 <script>
     import Banner from '../General/Banner.vue';
-    import FeaturePhotos from '../General/FeaturePhotos.vue';
+    import FeaturePhotos from './FeaturePhotos.vue';
     import NewProductList from './NewProductList.vue';
     import PromotionProductList from './PromotionProductList.vue';
     import BestSalerProductList from './BestSalerProductList.vue';

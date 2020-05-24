@@ -5,7 +5,7 @@
         </td>
         <td>
             <div class="product-cart-item-name">{{cart.name}}</div>
-            <div>{{cart.price}}</div>
+            <div>{{cart.price | dinhDangTien(".")}}</div>
         </td>
     </tr>
 </template>

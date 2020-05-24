@@ -1,35 +1,27 @@
 <template>
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">Liên hệ</div>
-
-                    <div class="card-body">
-                       Contact
-                    </div>
-                    <div>
-                        {{product.name}}
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div>
+        <Banner />
+        <ProductInforBanner />   
+        <ServiceList />
+        <Footer />
     </div>
 </template>
 
 <script>
-    export default {
-        data() {
-            return {
-                product: {id: 1, name: 'aaaa'}
-            }
-        },
-        mounted() {
-            this.eventBus.$on('addToCart', (product) =>{
-                this.product = product;
-                console.log(this.product);
-                console.log('aa');
-            });
-        }
+import Banner from '../General/Banner';
+import ProductInforBanner from '../General/ProductInforBanner';
+import ServiceList from '../General/ServiceList';
+import Footer from '../General/Footer';
+export default {
+    components: {
+        Banner,
+        ProductInforBanner,
+        ServiceList,
+        Footer
     }
+}
 </script>
+
+<style>
+
+</style>
