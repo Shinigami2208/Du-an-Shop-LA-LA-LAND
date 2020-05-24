@@ -10,6 +10,7 @@
         <ServiceList />
         <Footer />
         <AlertAddProductToCart />
+        <router-view></router-view>
     </div>
 </template>
 

@@ -3338,6 +3338,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 
@@ -25508,7 +25509,9 @@ var render = function() {
       _vm._v(" "),
       _c("Footer"),
       _vm._v(" "),
-      _c("AlertAddProductToCart")
+      _c("AlertAddProductToCart"),
+      _vm._v(" "),
+      _c("router-view")
     ],
     1
   )
@@ -41369,49 +41372,38 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODU
     path: '/about',
     name: 'about',
     component: _components_About_AboutIndex_vue__WEBPACK_IMPORTED_MODULE_3__["default"]
-  } // {
-  //     path: '/blog',
-  //     name: 'blog',
-  //     component: BlogIndex,
-  // },
-  // {
-  //     path: '/contact',
-  //     name: 'contact',
-  //     component: ContactIndex,
-  // },
-  // {
-  //     path: '/cart',
-  //     name: 'cart',
-  //     component: CartIndex,
-  // },
-  // {
-  //     path: '/account',
-  //     name: 'account',
-  //     component: AccountIndex,
-  //     children:[
-  //         {
-  //             path:'/profile',
-  //             name:'profile',
-  //             component: AccountProfile
-  //         }, 
-  //         {
-  //             path:'/order',
-  //             name:'order',
-  //             component: AccountOrder
-  //         }, 
-  //     ]
-  // },
-  // {
-  //     path: '/:product_slug:product_id',
-  //     name: 'detail_product',
-  //     component: DetailProductIndex,
-  //     params: true,
-  //     props: true,
-  // },
-  ],
-  redirect: {
-    '*': '/'
-  }
+  }, {
+    path: '/blog',
+    name: 'blog',
+    component: _components_Blog_BlogIndex_vue__WEBPACK_IMPORTED_MODULE_4__["default"]
+  }, {
+    path: '/contact',
+    name: 'contact',
+    component: _components_Contact_ContactIndex_vue__WEBPACK_IMPORTED_MODULE_5__["default"]
+  }, {
+    path: '/cart',
+    name: 'cart',
+    component: _components_Cart_CartIndex_vue__WEBPACK_IMPORTED_MODULE_6__["default"]
+  }, {
+    path: '/account',
+    name: 'account',
+    component: _components_Account_AccountIndex_vue__WEBPACK_IMPORTED_MODULE_8__["default"],
+    children: [{
+      path: '/profile',
+      name: 'profile',
+      component: _components_Account_AccountProfile_vue__WEBPACK_IMPORTED_MODULE_9__["default"]
+    }, {
+      path: '/order',
+      name: 'order',
+      component: _components_Account_AccountOrder_vue__WEBPACK_IMPORTED_MODULE_10__["default"]
+    }]
+  }, {
+    path: '/:product_slug:product_id',
+    name: 'detail_product',
+    component: _components_DetailProduct_DetailProductIndex_vue__WEBPACK_IMPORTED_MODULE_7__["default"],
+    params: true,
+    props: true
+  }]
 }));
 
 /***/ }),
