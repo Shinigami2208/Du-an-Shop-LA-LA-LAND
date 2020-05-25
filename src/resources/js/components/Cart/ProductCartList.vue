@@ -11,11 +11,11 @@
         <div class="row" style="padding-left: 15px; padding-right: 15px">
             <table class="table table-borderless col-12">
                 <thead>
-                    <tr>
+                    <tr style="text-align: center">
                         <th scope="col" width="15%"></th>
-                        <th scope="col" width="40%">Thông tin chi tiết sản phẩm</th>
+                        <th scope="col" width="43%">Thông tin chi tiết sản phẩm</th>
                         <th scope="col" width="15%">Đơn giá</th>
-                        <th scope="col" width="15%">Số lượng</th>
+                        <th scope="col" width="12%">Số lượng</th>
                         <th scope="col" width="15%">Tổng giá</th>
                     </tr>
                 </thead>
@@ -56,13 +56,24 @@ export default {
     },
     mounted(){
         this.caculateTotalPay();
-        // this.eventBus.$on('addToCart', (product) => {
-        //     if(this.carts.indexOf(product) !== -1){
-        //         window.alert('Sản Phẩm Đã Có Trong Giỏ Hàng');
-        //     }else{
-        //         this.carts.push(product);
-        //     }
-        // });
+        this.eventBus.$on('incQuantityCart',(cart)=>{
+            for(let i = 0; i < this.carts.length; i++){
+                if(this.carts[i].id === cart.id){
+                    this.carts[i].quantity  = this.carts[i].quantity + 1;
+                }
+            }
+        });
+        this.eventBus.$on('decQuantityCart',(cart)=>{
+            for(let i = 0; i < this.carts.length; i++){
+                if(this.carts[i].id === cart.id){
+                    if(this.carts[i].quantity == 1){
+                        return;
+                    }else{
+                        this.carts[i].quantity  = this.carts[i].quantity - 1;
+                    }
+                }
+            }
+        });
     },
     watch: {
         carts: {

@@ -25,7 +25,7 @@ export default {
 /* Banner Product Information */
 
 #banner-infor{
-    height: 350px;
+    height: 450px;
     background-image: url('../images/200726.jpg');
     background-repeat: no-repeat;
     background-size: cover;

@@ -2173,8 +2173,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['cart']
+  props: ['cart'],
+  methods: {
+    incQuantityCart: function incQuantityCart(cart) {
+      this.eventBus.$emit('incQuantityCart', cart);
+    },
+    decQuantityCart: function decQuantityCart(cart) {
+      this.eventBus.$emit('decQuantityCart', cart);
+    }
+  }
 });
 
 /***/ }),
@@ -2258,13 +2268,27 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   mounted: function mounted() {
-    this.caculateTotalPay(); // this.eventBus.$on('addToCart', (product) => {
-    //     if(this.carts.indexOf(product) !== -1){
-    //         window.alert('Sản Phẩm Đã Có Trong Giỏ Hàng');
-    //     }else{
-    //         this.carts.push(product);
-    //     }
-    // });
+    var _this = this;
+
+    this.caculateTotalPay();
+    this.eventBus.$on('incQuantityCart', function (cart) {
+      for (var i = 0; i < _this.carts.length; i++) {
+        if (_this.carts[i].id === cart.id) {
+          _this.carts[i].quantity = _this.carts[i].quantity + 1;
+        }
+      }
+    });
+    this.eventBus.$on('decQuantityCart', function (cart) {
+      for (var i = 0; i < _this.carts.length; i++) {
+        if (_this.carts[i].id === cart.id) {
+          if (_this.carts[i].quantity == 1) {
+            return;
+          } else {
+            _this.carts[i].quantity = _this.carts[i].quantity - 1;
+          }
+        }
+      }
+    });
   },
   watch: {
     carts: {
@@ -2402,10 +2426,28 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
-    return {};
-  }
+    return {
+      product: {
+        name: 'đàn piano điện casio ae-550m',
+        brand: 'Casio',
+        code: 'FP10',
+        vote: 4.7,
+        price: '12000000',
+        des: 'Đàn Piano Điện Casio AE-550M là một sản phẩm vô cùng độc đáo trong dòng sản phẩm Celviano của hàng piano Casio nổi tiếng Nhật Bản. Ngoài việc thừa hưởng các tính năng cơ bản và âm thanh vượt trội của dòng sản phẩm Celviano, AE-550M còn sở hữu một ngoài hình và thiết kế độc đáo hứa hẹn sẽ đem lại cho bạn một cây piano ưng ý trong tầm giá.'
+      }
+    };
+  },
+  mounted: function mounted() {}
 });
 
 /***/ }),
@@ -3775,7 +3817,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.product-cart-item-photo[data-v-aee34caa]{\n    height: 180px;\n}\n.product-cart-iteam-name[data-v-aee34caa]{\n    text-transform: uppercase;\n    font-size: 1.2rem;\n    font-weight: bold;\n    color: black;\n}\n.product-cart-iteam-name[data-v-aee34caa]:hover{\n    text-transform: uppercase;\n    font-size: 1.2rem;\n    font-weight: bold;\n    color: yellowgreen;\n    opacity: 0.5;\n    text-decoration: none;\n}\n.product-cart-iteam-price[data-v-aee34caa]{\n    font-size: 1.2rem;\n}\n.product-cart-iteam-total[data-v-aee34caa]{\n    font-size: 1.2rem;\n}\n", ""]);
+exports.push([module.i, "\n.product-cart-item-photo[data-v-aee34caa]{\n    height: 180px;\n}\n.product-cart-iteam-name[data-v-aee34caa]{\n    text-transform: uppercase;\n    font-size: 1.2rem;\n    font-weight: bold;\n    color: black;\n}\n.product-cart-iteam-name[data-v-aee34caa]:hover{\n    text-transform: uppercase;\n    font-size: 1.2rem;\n    font-weight: bold;\n    color: yellowgreen;\n    opacity: 0.5;\n    text-decoration: none;\n}\n.product-cart-iteam-price[data-v-aee34caa]{\n    font-size: 1.2rem;\n}\n.product-cart-iteam-total[data-v-aee34caa]{\n    font-size: 1.2rem;\n}\n.quantity-column[data-v-aee34caa]{\n    display: flex;\n    flex-direction: row;\n    text-align: center;\n}\n.quantity-cion-inc[data-v-aee34caa]{\n    flex-basis: 35px;\n}\n.quantity-cion-dec[data-v-aee34caa]{\n    flex-basis: 35px;\n}\n.quantity-icon[data-v-aee34caa]{\n    background-color: chartreuse;\n    border-radius: 3px;\n    text-align: center;\n    border: none;\n}\n.quantity-number[data-v-aee34caa]{\n    flex-grow: 1;\n}\n.quantity-icon[data-v-aee34caa]:hover{\n    opacity: 0.5;\n}\n.quantity-icon[data-v-aee34caa]:focus{\n    border: 1px solid yellow;\n}\n", ""]);
 
 // exports
 
@@ -3851,7 +3893,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.product-name[data-v-7c7b6317]{\n    text-transform: uppercase;\n    font-weight: bold;\n    font-size: 1.2rem;\n}\n.product-price[data-v-7c7b6317]{\n    font-size: 1.5rem;\n    font-weight: bold;\n    border-top: 1px solid gray;\n    border-bottom: 1px solid gray;\n    margin-top: 20px;\n    margin-bottom: 20px;\n}\n.btn-view-add-to-cart-type-1[data-v-7c7b6317]{\n    background-color:yellowgreen ;\n    display: block;\n    color: white;\n    padding-bottom: 8px;\n    padding-top: 8px;\n    width: 150px;\n    font-weight: bold;\n    text-align: center;\n    border-radius: 5px;\n    margin-top: 40px;\n}\n.btn-view-add-to-cart[data-v-7c7b6317]:hover{\n    opacity: 0.8;\n}\n", ""]);
+exports.push([module.i, "\n.product-name[data-v-7c7b6317]{\n    text-transform: uppercase;\n    font-weight: bold;\n    font-size: 1.2rem;\n}\n.product-price[data-v-7c7b6317]{\n    font-size: 1.5rem;\n    font-weight: bold;\n    border-top: 1px solid gray;\n    border-bottom: 1px solid gray;\n    margin-top: 20px;\n    margin-bottom: 20px;\n}\n.btn-view-add-to-cart-type-1[data-v-7c7b6317]{\n    background-color:yellowgreen ;\n    display: block;\n    color: white;\n    padding-bottom: 8px;\n    padding-top: 8px;\n    width: 150px;\n    font-weight: bold;\n    text-align: center;\n    border-radius: 5px;\n    margin-top: 40px;\n    border: none;\n}\n.btn-view-add-to-cart[data-v-7c7b6317]:hover{\n    opacity: 0.8;\n}\n.product-quantity[data-v-7c7b6317]{\n    margin-top: 30px;\n}\n.product-quantity-contain[data-v-7c7b6317]{\n    display: flex;\n    align-items: center;\n}\n.quantity-icon[data-v-7c7b6317]{\nbackground-color: chartreuse;\nborder-radius: 3px;\ntext-align: center;\nborder: none;\nflex-basis: 30px;\ncolor: white;\n}\n.quantity-number[data-v-7c7b6317]{\n    flex-basis: 35px;\n    text-align: center;\n}\n.quantity-icon[data-v-7c7b6317]:hover{\n    opacity: 0.5;\n}\n.product-quantity[data-v-7c7b6317]{\n    display: flex;\n}\n.product-quantity-title[data-v-7c7b6317]{\n    flex-basis: 100px;\n}\n.product-quantity-contain[data-v-7c7b6317]{\n    flex-basis: 300px;\n}\n", ""]);
 
 // exports
 
@@ -4023,7 +4065,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.product-cart-item-modal-photo[data-v-0357f584]{\r\n    height: 50px;\n}\n.product-cart-item-name[data-v-0357f584]{\r\n    text-transform: uppercase;\n}\r\n", ""]);
+exports.push([module.i, "\n.product-cart-item-modal-photo[data-v-0357f584]{\n    height: 50px;\n}\n.product-cart-item-name[data-v-0357f584]{\n    text-transform: uppercase;\n}\n", ""]);
 
 // exports
 
@@ -4062,7 +4104,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* Banner */\n\n/* Banner Product Information */\n#banner-infor[data-v-f5f00e9a]{\n    height: 350px;\n    background-image: url(" + escape(__webpack_require__(/*! ../images/200726.jpg */ "./resources/js/components/images/200726.jpg")) + ");\n    background-repeat: no-repeat;\n    background-size: cover;\n    background-position: center center;\n    background-attachment: fixed;\n}\n.product-infor[data-v-f5f00e9a]{\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    flex-direction: column;\n    color: white;\n}\n.product-name[data-v-f5f00e9a]{\n    font-size: 1.5rem;\n    text-transform: uppercase;\n    margin-bottom: 30px;\n}\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* Banner */\n\n/* Banner Product Information */\n#banner-infor[data-v-f5f00e9a]{\n    height: 450px;\n    background-image: url(" + escape(__webpack_require__(/*! ../images/200726.jpg */ "./resources/js/components/images/200726.jpg")) + ");\n    background-repeat: no-repeat;\n    background-size: cover;\n    background-position: center center;\n    background-attachment: fixed;\n}\n.product-infor[data-v-f5f00e9a]{\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    flex-direction: column;\n    color: white;\n}\n.product-name[data-v-f5f00e9a]{\n    font-size: 1.5rem;\n    text-transform: uppercase;\n    margin-bottom: 30px;\n}\n\n", ""]);
 
 // exports
 
@@ -23800,15 +23842,55 @@ var render = function() {
       ])
     ]),
     _vm._v(" "),
-    _c("td", { staticClass: "product-cart-iteam-price" }, [
-      _vm._v(_vm._s(_vm.cart.price))
+    _c(
+      "td",
+      {
+        staticClass: "product-cart-iteam-price",
+        staticStyle: { "text-align": "center" }
+      },
+      [_vm._v(_vm._s(_vm.cart.price))]
+    ),
+    _vm._v(" "),
+    _c("td", { staticClass: "quantity-column" }, [
+      _c(
+        "button",
+        {
+          staticClass: "quantity-icon quantity-cion-inc",
+          on: {
+            click: function($event) {
+              return _vm.incQuantityCart(_vm.cart)
+            }
+          }
+        },
+        [_vm._v("+")]
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "quantity-number" }, [
+        _vm._v(_vm._s(_vm.cart.quantity))
+      ]),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "quantity-icon quantity-cion-dec",
+          on: {
+            click: function($event) {
+              return _vm.decQuantityCart(_vm.cart)
+            }
+          }
+        },
+        [_vm._v("-")]
+      )
     ]),
     _vm._v(" "),
-    _c("td", [_vm._v("\n        " + _vm._s(_vm.cart.quantity) + "\n    ")]),
-    _vm._v(" "),
-    _c("td", { staticClass: "product-cart-iteam-total" }, [
-      _vm._v("\n        " + _vm._s(_vm.cart.price) + "\n    ")
-    ])
+    _c(
+      "td",
+      {
+        staticClass: "product-cart-iteam-total",
+        staticStyle: { "text-align": "center" }
+      },
+      [_vm._v("\n        " + _vm._s(_vm.cart.price) + "\n    ")]
+    )
   ])
 }
 var staticRenderFns = []
@@ -23885,10 +23967,10 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("thead", [
-      _c("tr", [
+      _c("tr", { staticStyle: { "text-align": "center" } }, [
         _c("th", { attrs: { scope: "col", width: "15%" } }),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "col", width: "40%" } }, [
+        _c("th", { attrs: { scope: "col", width: "43%" } }, [
           _vm._v("Thông tin chi tiết sản phẩm")
         ]),
         _vm._v(" "),
@@ -23896,7 +23978,7 @@ var staticRenderFns = [
           _vm._v("Đơn giá")
         ]),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "col", width: "15%" } }, [
+        _c("th", { attrs: { scope: "col", width: "12%" } }, [
           _vm._v("Số lượng")
         ]),
         _vm._v(" "),
@@ -24063,45 +24145,70 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { staticClass: "detail-product-content" }, [
+    _c("div", { staticClass: "product-name" }, [
+      _vm._v(_vm._s(_vm.product.name))
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "product-brand" }, [
+      _vm._v(
+        "Thương hiệu: " +
+          _vm._s(_vm.product.brand) +
+          " | Mã SP: " +
+          _vm._s(_vm.product.code)
+      )
+    ]),
+    _vm._v(" "),
+    _vm._m(0),
+    _vm._v(" "),
+    _c("div", { staticClass: "product-price" }, [
+      _vm._v(_vm._s(_vm._f("dinhDangTien")(_vm.product.price, ".")))
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "product-information" }, [
+      _vm._v(_vm._s(_vm.product.des))
+    ]),
+    _vm._v(" "),
+    _vm._m(1),
+    _vm._v(" "),
+    _c("button", { staticClass: "btn-view-add-to-cart-type-1" }, [
+      _vm._v("Thêm Vào Giỏ Hàng")
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "detail-product-content" }, [
-      _c("div", { staticClass: "product-name" }, [
-        _vm._v("đàn piano điện casio ae-550m")
+    return _c("div", [
+      _vm._v("\n        Đánh giá: \n        "),
+      _c("i", { staticClass: "fas fa-star" }),
+      _vm._v(" "),
+      _c("i", { staticClass: "fas fa-star" }),
+      _vm._v(" "),
+      _c("i", { staticClass: "fas fa-star" }),
+      _vm._v(" "),
+      _c("i", { staticClass: "fas fa-star" }),
+      _vm._v(" "),
+      _c("i", { staticClass: "fas fa-star" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "product-quantity" }, [
+      _c("div", { staticClass: "product-quantity-title" }, [
+        _vm._v("Số lượng:")
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "product-brand" }, [
-        _vm._v("Thương hiệu: Casio | Mã SP: FP10")
-      ]),
-      _vm._v(" "),
-      _c("div", [
-        _vm._v("\n        Đánh giá: \n        "),
-        _c("i", { staticClass: "fas fa-star" }),
+      _c("div", { staticClass: "product-quantity-contain" }, [
+        _c("button", { staticClass: "quantity-icon" }, [_vm._v("+")]),
         _vm._v(" "),
-        _c("i", { staticClass: "fas fa-star" }),
+        _c("div", { staticClass: "quantity-number" }, [_vm._v("1")]),
         _vm._v(" "),
-        _c("i", { staticClass: "fas fa-star" }),
-        _vm._v(" "),
-        _c("i", { staticClass: "fas fa-star" }),
-        _vm._v(" "),
-        _c("i", { staticClass: "fas fa-star" })
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "product-price" }, [_vm._v("12.000.000đ")]),
-      _vm._v(" "),
-      _c("div", { staticClass: "product-information" }, [
-        _vm._v(
-          "Đàn Piano Điện Casio AE-550M là một sản phẩm vô cùng độc đáo trong dòng sản phẩm Celviano của hàng piano Casio nổi tiếng Nhật Bản. Ngoài việc thừa hưởng các tính năng cơ bản và âm thanh vượt trội của dòng sản phẩm Celviano, AE-550M còn sở hữu một ngoài hình và thiết kế độc đáo hứa hẹn sẽ đem lại cho bạn một cây piano ưng ý trong tầm giá."
-        )
-      ]),
-      _vm._v(" "),
-      _c("span", { staticClass: "btn-view-add-to-cart-type-1" }, [
-        _vm._v("Thêm Vào Giỏ Hàng")
+        _c("button", { staticClass: "quantity-icon" }, [_vm._v("-")])
       ])
     ])
   }
@@ -24762,7 +24869,7 @@ var staticRenderFns = [
             staticClass: "search-item-brand-input",
             attrs: {
               type: "text",
-              name: "search",
+              name: "keyword",
               placeholder: "Tìm kiếm sản phẩm hoặc nhãn hiệu"
             }
           }),
@@ -41418,17 +41525,6 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODU
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Router_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Router.js */ "./resources/js/Router.js");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _components_Home_HomeIndex_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/Home/HomeIndex.vue */ "./resources/js/components/Home/HomeIndex.vue");
-/* harmony import */ var _components_About_AboutIndex_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/About/AboutIndex.vue */ "./resources/js/components/About/AboutIndex.vue");
-/* harmony import */ var _components_Blog_BlogIndex_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/Blog/BlogIndex.vue */ "./resources/js/components/Blog/BlogIndex.vue");
-/* harmony import */ var _components_Contact_ContactIndex_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/Contact/ContactIndex.vue */ "./resources/js/components/Contact/ContactIndex.vue");
-/* harmony import */ var _components_Cart_CartIndex_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/Cart/CartIndex.vue */ "./resources/js/components/Cart/CartIndex.vue");
-/* harmony import */ var _components_DetailProduct_DetailProductIndex_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/DetailProduct/DetailProductIndex.vue */ "./resources/js/components/DetailProduct/DetailProductIndex.vue");
-/* harmony import */ var _components_Account_AccountIndex_vue__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/Account/AccountIndex.vue */ "./resources/js/components/Account/AccountIndex.vue");
-/* harmony import */ var _components_Account_AccountProfile_vue__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/Account/AccountProfile.vue */ "./resources/js/components/Account/AccountProfile.vue");
-/* harmony import */ var _components_Account_AccountOrder_vue__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/Account/AccountOrder.vue */ "./resources/js/components/Account/AccountOrder.vue");
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -41438,24 +41534,13 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 
 window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js"); // Router
 
-
- // import routes from './Routes.js';
-
-
-
-
-
-
-
-
-
  // Event Bus
 
-vue__WEBPACK_IMPORTED_MODULE_1___default.a.prototype.eventBus = new vue__WEBPACK_IMPORTED_MODULE_1___default.a(); // Lodash
+Vue.prototype.eventBus = new Vue(); // Lodash
 
-vue__WEBPACK_IMPORTED_MODULE_1___default.a.prototype._ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js"); // Rewrite-URL
+Vue.prototype._ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js"); // Rewrite-URL
 
-vue__WEBPACK_IMPORTED_MODULE_1___default.a.prototype.rewriteUrl = function rewriteUrl(title) {
+Vue.prototype.rewriteUrl = function rewriteUrl(title) {
   var slug = ""; // Change to lower case
 
   var titleLower = title.toLowerCase(); // Letter "e"
@@ -41481,7 +41566,7 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.prototype.rewriteUrl = function rewri
 }; //  Filter
 
 
-vue__WEBPACK_IMPORTED_MODULE_1___default.a.filter('dinhDangTien', function (soTien, phanCach) {
+Vue.filter('dinhDangTien', function (soTien, phanCach) {
   return soTien.toString().replace(/\B(?=(\d{3})+(?!\d))/g, phanCach) + '₫';
 });
 /**
@@ -41500,7 +41585,7 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.filter('dinhDangTien', function (soTi
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-var app = new vue__WEBPACK_IMPORTED_MODULE_1___default.a({
+var app = new Vue({
   el: '#app',
   router: _Router_js__WEBPACK_IMPORTED_MODULE_0__["default"]
 });

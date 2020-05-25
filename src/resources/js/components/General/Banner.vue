@@ -37,7 +37,7 @@
                     <i class="fas fa-bars"></i>
                     Tất cả danh mục
                 </a>
-                <input type="text" name="search" class="search-item-brand-input" placeholder="Tìm kiếm sản phẩm hoặc nhãn hiệu" />
+                <input type="text" name="keyword" class="search-item-brand-input" placeholder="Tìm kiếm sản phẩm hoặc nhãn hiệu" />
                 <div class="search-icon"><i class="fas fa-search "></i></div>
             </div>
         </div>

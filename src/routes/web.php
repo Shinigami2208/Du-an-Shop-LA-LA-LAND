@@ -61,3 +61,8 @@ Route::get('/admin', 'AdminController@index')->middleware('role:admin')->name('a
 Route::get('/', 'HomeController@index')->name('home');
 
 Auth::routes();
+
+// SPA
+Route::get('/{url}', function () {
+    return view('home');
+})->where('url', '[A-Za-z0-9\-\.]+');

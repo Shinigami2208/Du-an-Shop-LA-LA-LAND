@@ -7,11 +7,13 @@
             <a href="#" class="product-cart-iteam-name">{{cart.name}}</a>
             <div class="product-cart-iteam-note">{{cart.des}}</div>
         </td>
-        <td class="product-cart-iteam-price">{{cart.price}}</td>
-        <td>
-            {{cart.quantity}}
+        <td class="product-cart-iteam-price" style="text-align: center">{{cart.price}}</td>
+        <td class="quantity-column">
+            <button class="quantity-icon quantity-cion-inc" @click="incQuantityCart(cart)">+</button>
+            <div class="quantity-number">{{cart.quantity}}</div>
+            <button class="quantity-icon quantity-cion-dec" @click="decQuantityCart(cart)">-</button>
         </td>
-        <td class="product-cart-iteam-total">
+        <td class="product-cart-iteam-total" style="text-align: center">
             {{cart.price}}
         </td>
     </tr>
@@ -21,6 +23,14 @@
 
 export default {
     props: ['cart'],
+    methods: {
+        incQuantityCart(cart){
+            this.eventBus.$emit('incQuantityCart', cart);
+        },
+        decQuantityCart(cart){
+            this.eventBus.$emit('decQuantityCart', cart);
+        },
+    }
 }
 
 </script>
@@ -52,5 +62,37 @@ export default {
 
 .product-cart-iteam-total{
     font-size: 1.2rem;
+}
+
+.quantity-column{
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+}
+.quantity-cion-inc{
+    flex-basis: 35px;
+}
+
+.quantity-cion-dec{
+    flex-basis: 35px;
+}
+
+.quantity-icon{
+    background-color: chartreuse;
+    border-radius: 3px;
+    text-align: center;
+    border: none;
+}
+
+.quantity-number{
+    flex-grow: 1;
+}
+
+.quantity-icon:hover{
+    opacity: 0.5;
+}
+
+.quantity-icon:focus{
+    border: 1px solid yellow;
 }
 </style>
