@@ -10,20 +10,8 @@ window.Vue = require('vue');
 window.axios = require('axios');
 
 // Router
-import router from './Router.js'
-import Vue from 'vue'
+import router from './Router.js';
 
-// import routes from './Routes.js';
-
-import HomeIndex from './components/Home/HomeIndex.vue';
-import AboutIndex from './components/About/AboutIndex.vue';
-import BlogIndex from './components/Blog/BlogIndex.vue';
-import ContactIndex from './components/Contact/ContactIndex.vue';
-import CartIndex from './components/Cart/CartIndex.vue';
-import DetailProductIndex from './components/DetailProduct/DetailProductIndex.vue';
-import AccountIndex from './components/Account/AccountIndex.vue';
-import AccountProfile from './components/Account/AccountProfile.vue';
-import AccountOrder from './components/Account/AccountOrder.vue';
 // Event Bus
 Vue.prototype.eventBus = new Vue();
 
@@ -82,5 +70,5 @@ Vue.filter('dinhDangTien', function(soTien, phanCach){
 
 const app = new Vue({
     el: '#app',
-    router:router
+    router
 });

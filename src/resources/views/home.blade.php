@@ -104,6 +104,10 @@
                     width: 100%;
                 }
 
+                .home-product-list-item-name{
+                    text-align: center;
+                }
+
                 .home-product-list-item:hover{
                     transform: translateY(-5px);
                     border-top: 1px solid gray;

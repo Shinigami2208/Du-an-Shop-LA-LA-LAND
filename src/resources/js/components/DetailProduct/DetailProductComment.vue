@@ -38,15 +38,6 @@
         margin-bottom: 20px;
     }
 
-    .comment-item{
-        margin-top: 20px;
-        display: flex;
-        height: 40px;
-        border: 1px solid gainsboro;
-        align-items: center;
-        margin-bottom: 30px;
-    }
-
     .comment-user{
         flex-basis: 120px;
     }
