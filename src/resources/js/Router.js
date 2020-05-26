@@ -9,6 +9,7 @@ import DetailProductIndex from './components/DetailProduct/DetailProductIndex.vu
 import AccountIndex from './components/Account/AccountIndex.vue';
 import AccountProfile from './components/Account/AccountProfile.vue';
 import AccountOrder from './components/Account/AccountOrder.vue';
+import FilterProductListIndex from './components/FilterProductList/FilterProductListIndex.vue';
 
 Vue.use(VueRouter)
 
@@ -58,11 +59,16 @@ export default new VueRouter({
             ]
         },
         {
+            path: '/product-list',
+            name: 'filter-product-list',
+            component: FilterProductListIndex
+        },
+        {
             path: '/:product_slug:product_id',
             name: 'detail_product',
             component: DetailProductIndex,
             params: true,
             props: true,
-        },    
+        }, 
     ],
   })

@@ -21,6 +21,17 @@
                 </thead>
                 <tbody>
                     <ProductCartIteam v-for="cart in carts" :key="cart.id" :cart="cart" />
+                    <tr>
+                        <td colspan="5"  class="pagination-custom" >
+                            <Pagination
+                                :total-pages="11"
+                                :total="113"
+                                :per-page="10"
+                                :current-page="currentPage"
+                                @pagechanged="onPageChange"
+                            />
+                        </td>
+                    </tr>
                     <CartTotalPay :totalPay="totalPay" />
                 </tbody>
                 </table>
@@ -31,6 +42,7 @@
 <script>
 import ProductCartIteam from './ProductCartIteam.vue';
 import CartTotalPay from './CartTotalPay.vue';
+import Pagination from '../General/Pagination.vue'
 
 export default {
     data() {
@@ -40,11 +52,13 @@ export default {
                 {id: 2, src: "https://placekitten.com/802/800", name: 'ĐÀN CASIO CT-X3000', des: '12 Tháng / Bao Da 3 Lớp, Máy Lên Dây, Capo. Miễn Phí Vận Chuyển Toàn Quốc', price: 3000000, quantity: 1, link: 'DAN-CASIO-CT-X3000'},
             ],
             totalPay: null,
+            currentPage: 1,
         }
     },
     components: {
         ProductCartIteam, 
-        CartTotalPay
+        CartTotalPay,
+        Pagination,
     },
     methods: {
         caculateTotalPay(){
@@ -52,6 +66,10 @@ export default {
                 sum = sum + cart.price * cart.quantity;
                 return sum;
             }, 0)
+        },
+        onPageChange(page) {
+            console.log(page)
+            this.currentPage = page;
         }
     },
     mounted(){
@@ -71,7 +89,7 @@ export default {
                     }else{
                         this.carts[i].quantity  = this.carts[i].quantity - 1;
                     }
-                }
+                }pagination-custom
             }
         });
     },
@@ -82,7 +100,7 @@ export default {
             },
             deep: true,
             immediate: true
-        }
+        },
     }
 }
 </script>
@@ -102,5 +120,8 @@ export default {
 tr{
     border-top: 1px solid gray;
     border-bottom: 1px solid gray;
+}
+.pagination-custom{
+    padding-top: 50px;
 }
 </style>
