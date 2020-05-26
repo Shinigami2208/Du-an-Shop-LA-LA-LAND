@@ -22,7 +22,7 @@ export default {
 <style scoped>
 /* Banner */
 
-/* Banner Product Information */
+/* Banner product Information */
 
 #banner-infor{
     height: 450px;

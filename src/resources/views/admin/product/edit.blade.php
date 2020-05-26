@@ -10,7 +10,7 @@
 <div class="card card-primary">
     <!-- /.card-header -->
     <!-- form start -->
-    <form role="form" method="post"" action="{{route('adminProduct.update', [$product->id])}}">
+    <form role="form" method="post" action="{{route('adminProduct.update', [$product->id])}}">
         {{method_field('PUT')}}
         {{csrf_field()}}
         <div class="card-body">
@@ -34,7 +34,7 @@
                 <label for="description">Miêu Tả</label>
                 <textarea class="form-control" rows="3" name="description" id="description">{{$product->description}}</textarea>
             </div>
-            
+
         </div>
         <!-- /.card-body -->
 

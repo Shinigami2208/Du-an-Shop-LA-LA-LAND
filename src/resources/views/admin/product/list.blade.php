@@ -8,6 +8,18 @@
 
 @section('content')
 <div class="row">
+    @if(session('messeger_errors'))
+        {{ session('messeger_errors') }}
+    @endif
+        <div class="modal-body">
+            @if(count($errors))
+                    @foreach($errors->all() as $error)
+                    <div class="alert alert-danger">
+                        {{ $error }}
+                    </div>
+                    @endforeach
+            @endif
+        </div>
     <div class="col-md-12">
         <div class="card">
             <div class="card-header">
@@ -19,12 +31,12 @@
             </div>
             </div>
             <!-- /.card-header -->
-            <div class="card-body p-0">
+            <div class="card-body p-0 table-list">
                 <table class="table">
                     <thead>
                     <tr>
                         <th >STT</th>
-                        <th>Hình ảnh</th>
+                        <th>Số hình ảnh</th>
                         <th >Tên Sản Phẩm</th>
                         <th >Danh Mục</th>
                         <th >Đơn giá</th>
@@ -38,9 +50,7 @@
                         <tr>
                             <td>{{$key + 1}}</td>
                             <td>
-                                @foreach($product->images as $image)
-                                    <image src="{{ $image->image }}" alt="Image" height="200">
-                                @endForeach
+                               {{ count($product->images) }}
                             </td>
                             <td>{{ $product->name }}</td>
                             <td>
@@ -50,200 +60,36 @@
                             <td>{{ $product->promotion_price }}</td>
                             <td> {{ $product->quality }} </td>
                             <td>
-                                <a href="#"><button class="btn btn-default">xem</button></a>
-                                <button onclick="edit(this)" data-url="{{ route('Admin.Product.edit',$product->id) }}" class="btn btn-default btnEdit">sửa</button>
-                                <a href="{{route('adminProductDeleteForm', [$product->id])}}" ><button class="btn btn-default">xóa</button></a>
+                                <button onclick="detailProduct(this)" data-url="{{ route('Admin.product.detailComment',$product->id) }}" class="btn btn-default">xem</button>
+                                <button onclick="edit(this)" data-url="{{ route('Admin.product.edit',$product->id) }}" class="btn btn-default btnEdit">sửa</button>
+                                <button onclick="deleteProduct(this)" data-url ="{{ route('Admin.product.delete') }}" data-id="{{ $product->id }}" class="btn btn-default">xóa</button>
                             </td>
                         </tr>
                     @endforeach
                     </tbody>
+                    <div class="text-center">{{ $products->appends('page')->links() }}</div>
                 </table>
+
             </div>
             <!-- /.card-body -->
         </div>
     </div>
+        <!-- xem san pham -->
+    <div class="container-fluid detail_product">
 
+    </div>
 
-    <div class="modal fade" id="modal-create" style="display: none;" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-            <div class="modal-header bg-primary">
-                <h4 class="modal-title">Thêm Sản Phẩm</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">×</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <!-- /.card-header -->
-                <!-- form start -->
-                    <form role="form" method="post" action="{{route('adminProduct.store')}}">
-                        {{csrf_field()}}
-                        <div class="card-body">
-                            <div class="form-group">
-                                <label for="inputName">Tên Sản Phẩm</label>
-                                <input type="text" class="form-control" name="name" id="inputName" placeholder="Ten san pham...">
-                            </div>
-                            <div class="form-group">
-                                <label>Danh Mục</label>
-                                <select multiple="" class="form-control" name="category_id">
-                                    @foreach ($categories as $category)
-                                        <option value="{{ $category->id }}">{{$category->name}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="row">
-                                <div class="col-6">
-                                    <div class="form-group">
-                                        <label>Thương Hiệu</label>
-                                        <select class="custom-select" name="brand_id">
-                                            @foreach ($brands as $brand)
-                                            <option value="{{$brand->id}}">{{$brand->name}}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="form-group">
-                                        <label>Nhà Cung Cấp</label>
-                                        <select class="custom-select" name="supplier_id">
-                                            @foreach ($suppliers as $supplier)
-                                            <option value="{{$supplier->id}}">{{$supplier->name}}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-6">
-                                    <div class="form-group">
-                                        <label for="inputPrice">Giá Sản Phẩm</label>
-                                        <input type="text" class="form-control" name="unit_price" id="inputPrice" placeholder="Gia san pham"...">
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="form-group">
-                                        <label for="promotion_price">Giá Khuyến Mãi</label>
-                                        <input type="text" class="form-control" name="promotion_price" id="promotion_price" placeholder="Gia khuyen mai...">
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="form-group">
-                                        <label for="promotion_price">So luong</label>
-                                        <input type="text" class="form-control" name="quality" id="promotion_price" placeholder="Gia khuyen mai...">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="description">Mô Tả</label>
-                                <textarea class="form-control" rows="3" name="description" id="description" placeholder="Mo ta..."></textarea>
-                            </div>
-                        </div>
-                        <!-- /.card-body -->
-                        <div class="card-footer">
-                            <button type="submit" class="btn btn-primary">Tạo sản phẩm</button>
-                            <button type="reset" class="btn btn-primary">Reset</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-            <!-- /.modal-content -->
-        </div>
-    </div>
-    <div class="modal fade" id="modal-edit" style="display: none;" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header bg-primary">
-                    <h4 class="modal-title">Thêm Sản Phẩm</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <!-- /.card-header -->
-                    <!-- form start -->
-                    <form role="form" method="post" action="{{route('adminProduct.store')}}">
-                        {{csrf_field()}}
-                        <div class="card-body">
-                            <div class="form-group">
-                                <label for="inputName">Tên Sản Phẩm</label>
-                                <input type="text" class="form-control" name="name" id="inputName" placeholder="Ten san pham...">
-                            </div>
-                            <div class="form-group">
-                                <label>Danh Mục</label>
-                                <select multiple="" class="form-control" name="category_id">
-                                    @foreach ($categories as $category)
-                                        <option value="{{ $category->id }}">{{$category->name}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="row">
-                                <div class="col-6">
-                                    <div class="form-group">
-                                        <label>Thương Hiệu</label>
-                                        <select class="custom-select" name="brand_id">
-                                            @foreach ($brands as $brand)
-                                                <option value="{{$brand->id}}">{{$brand->name}}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="form-group">
-                                        <label>Nhà Cung Cấp</label>
-                                        <select class="custom-select" name="supplier_id">
-                                            @foreach ($suppliers as $supplier)
-                                                <option value="{{$supplier->id}}">{{$supplier->name}}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-6">
-                                    <div class="form-group">
-                                        <label for="inputPrice">Giá Sản Phẩm</label>
-                                        <input type="text" class="form-control" name="unit_price" id="inputPrice" placeholder="Gia san pham"...">
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="form-group">
-                                        <label for="promotion_price">Giá Khuyến Mãi</label>
-                                        <input type="text" class="form-control" name="promotion_price" id="promotion_price" placeholder="Gia khuyen mai...">
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="form-group">
-                                        <label for="promotion_price">So luong</label>
-                                        <input type="text" class="form-control" name="quality" id="promotion_price" placeholder="Gia khuyen mai...">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="description">Mô Tả</label>
-                                <textarea class="form-control" rows="3" name="description" id="description" placeholder="Mo ta..."></textarea>
-                            </div>
-                        </div>
-                        <!-- /.card-body -->
-                        <div class="card-footer">
-                            <button type="submit" class="btn btn-primary">Tạo sản phẩm</button>
-                            <button type="reset" class="btn btn-primary">Reset</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-            <!-- /.modal-content -->
-        </div>
-    </div>
+    @include('admin.product.modal_product')
 </div>
 @stop
 
 @section('css')
-    <link rel="stylesheet" href="/css/admin_custom.css">
+    <link rel="stylesheet" href="{{ asset('/css/product_css.css') }}">
 @stop
-
 @section('js')
    <script>
-        function edit(button) {
+
+       function edit(button) {
             var url = button.getAttribute('data-url');
             $.ajax({
                 url : url,
@@ -254,5 +100,29 @@
             $("#modal-edit").modal('show');
         }
 
+       function deleteProduct(button) {
+            var url = button.getAttribute('data-url');
+            var id = button.getAttribute('data-id');
+            $.ajax({
+                type:"post",
+                url: url,
+                data:{
+                    id:id,
+                    _token: '{{ csrf_token() }}',
+                },
+                success: function () {
+                    location.reload();
+                }
+            });
+       }
+       function detailProduct(button) {
+            var url = button.getAttribute('data-url');
+            $.ajax({
+               url : url,
+               success : function (data) {
+                    $(".detail_product").html(data);
+               }
+            });
+       }
    </script>
 @stop

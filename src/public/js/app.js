@@ -4339,7 +4339,11 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
+<<<<<<< HEAD
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* Banner */\n\n/* Banner product Information */\n#banner-infor[data-v-f5f00e9a]{\n    height: 350px;\n    background-image: url(" + escape(__webpack_require__(/*! ../images/200726.jpg */ "./resources/js/components/images/200726.jpg")) + ");\n    background-repeat: no-repeat;\n    background-size: cover;\n    background-position: center center;\n    background-attachment: fixed;\n}\n.product-infor[data-v-f5f00e9a]{\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    flex-direction: column;\n    color: white;\n}\n.product-name[data-v-f5f00e9a]{\n    font-size: 1.5rem;\n    text-transform: uppercase;\n    margin-bottom: 30px;\n}\n\n", ""]);
+=======
 exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* Banner */\n\n/* Banner Product Information */\n#banner-infor[data-v-f5f00e9a]{\n    height: 450px;\n    background-image: url(" + escape(__webpack_require__(/*! ../images/200726.jpg */ "./resources/js/components/images/200726.jpg")) + ");\n    background-repeat: no-repeat;\n    background-size: cover;\n    background-position: center center;\n    background-attachment: fixed;\n}\n.product-infor[data-v-f5f00e9a]{\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    flex-direction: column;\n    color: white;\n}\n.product-name[data-v-f5f00e9a]{\n    font-size: 1.5rem;\n    text-transform: uppercase;\n    margin-bottom: 30px;\n}\n\n", ""]);
+>>>>>>> master
 
 // exports
 
@@ -4377,7 +4381,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n    /* Best Saler Product List  */\n.best-saler-product-list[data-v-43bd12ca]{\n    padding-top: 40px;\n}\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n    /* Best Saler product List  */\n.best-saler-product-list[data-v-43bd12ca]{\n    padding-top: 40px;\n}\n", ""]);
 
 // exports
 
@@ -4473,7 +4477,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* New Product List  */\n.new-product-list[data-v-0099f322]{\n    padding-top: 40px;\n}\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* New product List  */\n.new-product-list[data-v-0099f322]{\n    padding-top: 40px;\n}\n\n", ""]);
 
 // exports
 
@@ -4492,7 +4496,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n    /* Promotion Product List */\n.promotion-product-list[data-v-3716a002]{\n    padding-top: 40px;\n}\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n    /* Promotion product List */\n.promotion-product-list[data-v-3716a002]{\n    padding-top: 40px;\n}\n", ""]);
 
 // exports
 

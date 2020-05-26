@@ -41,7 +41,7 @@
 </script>
 
 <style scoped>
-/* New Product List  */
+/* New product List  */
 
 .new-product-list{
     padding-top: 40px;

@@ -37,7 +37,7 @@ export default {
 </script>
 
 <style scoped>
-    /* Best Saler Product List  */
+    /* Best Saler product List  */
 
 .best-saler-product-list{
     padding-top: 40px;
