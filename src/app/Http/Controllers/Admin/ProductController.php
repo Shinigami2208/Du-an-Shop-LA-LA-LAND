@@ -8,7 +8,10 @@ use App\Models\Product;
 use App\Models\Category;
 use App\Models\Brand;
 use App\Models\Supplier;
-
+use App\Models\Stock;
+use App\Http\Requests\ProductRequest;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Image;
 
 class ProductController extends Controller
 {
@@ -20,7 +23,7 @@ class ProductController extends Controller
      */
     public function __construct()
     {
-        $products = Product::all();
+        $products = Product::paginate(5);
         $categories = Category::all();
         $brands = Brand::all();
         $suppliers = Supplier::all();
@@ -43,7 +46,6 @@ class ProductController extends Controller
     public function create()
     {
         //
-        return view('admin.product.create', ['categories' => Category::all()] );
     }
 
     /**
@@ -52,7 +54,7 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ProductRequest $request)
     {
         //
         $product = Product::Create([
@@ -65,6 +67,24 @@ class ProductController extends Controller
             'description' => $request->description,
             'quality' => $request->quality,
         ]);
+
+        $stock = Stock::create([
+            'product_id' => $product->id,
+            'supplier_id' => $request->supplier_id,
+            'quality' => $request->quality,
+            'payment' => $request->unit_price*$request->quality,
+        ]);
+
+        if($request->hasFile('image')){
+            $file = $request->file('image');
+            $name =time() . "-" . $file->getClientOriginalName();
+            $path = public_path('/images/product');
+            $file->move($path,$name);
+            $image = Image::create([
+                'product_id' => $product->id,
+                'image' => $name
+            ]);
+        }
         return redirect()->back();
     }
 
@@ -103,10 +123,9 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ProductRequest $request, $id)
     {
         Product::find($id)->update($request->all());
-
         return redirect()->back();
     }
 
@@ -116,17 +135,15 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request, $id)
-    {
-        //
-        $product = Product::find($id);
+    public function deleteForm(Request $request){
+        $product = Product::find($request->id);
         $product->delete();
-        // $product -> categories() -> detach(3);
-        print_r($product->categories()->get());
-        // return redirect()->route('adminProduct.index');
     }
-
-    public function deleteForm(Request $request, $id){
-        return view('admin.product.delete', ['product' => Product::find($id), 'id' => $id]);
+    // lay chi tiet comment va hinh anh
+    public function getCommentImage($id){
+        $product = Product::find($id);
+        $comments = $product->comments;
+        $images = $product->images;
+        return view('admin.product.ajax_get_comment_image', compact('comments', 'images'));
     }
 }

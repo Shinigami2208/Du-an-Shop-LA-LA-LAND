@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import PromotionProductItem from './PromotionProductItem.vue'; 
+import PromotionProductItem from './PromotionProductItem.vue';
 export default {
     data() {
         return {
@@ -39,7 +39,7 @@ export default {
 </script>
 
 <style scoped>
-    /* Promotion Product List */
+    /* Promotion product List */
 
 .promotion-product-list{
     padding-top: 40px;

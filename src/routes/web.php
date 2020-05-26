@@ -31,33 +31,37 @@ Route::get('/facebook-callback', 'Auth\SocialAuthController@loginFacebookCallbac
 Route::group(['prefix'=>'admin'], function (){
 
     Route::group(['prefix'=>'category'], function (){
-        Route::resource('/', 'Admin\CategoryController', ['names'=> 'adminCategory']);
+
         Route::get('delete/{id}', 'Admin\CategoryController@deleteForm')->name('adminCategoryDeleteForm');
     });
 
     Route::group(['prefix'=>'product'], function (){
         Route::get('/', 'Admin\ProductController@index');
-        Route::get('/create','Admin\ProductController@store')->name('adminProduct.store');
-        Route::get('/showEdit/{id}', 'Admin\ProductController@showEdit')->name('Admin.Product.edit');
-        Route::post('/PostEdit/{id}', 'Admin\ProductController@update')->name('Admin.Product.PostEdit');
-        Route::get('/delete/{id}', 'Admin\ProductController@deleteForm')->name('adminProductDeleteForm');
+        Route::post('/create','Admin\ProductController@store')->name('adminProduct.store');
+        // ajax sửa sản phẩm
+        Route::get('/showEdit/{id}', 'Admin\ProductController@showEdit')->name('Admin.product.edit');
+        // ajax xem chi tiết ảnh và comment
+        Route::get('detail/comment/{id}', 'Admin\ProductController@getCommentImage')->name('Admin.product.detailComment');
+        Route::post('/PostEdit/{id}', 'Admin\ProductController@update')->name('Admin.product.PostEdit');
+        Route::post('/delete', 'Admin\ProductController@deleteForm')->name('Admin.product.delete');
+        Route::get('/test', 'Admin\ProductController@test');
     });
 
     Route::group(['prefix'=>'image'], function(){
-        Route::resource('/', 'Admin\ImageController', ['names' => 'adminImage']);
+
     });
 
     Route::group(['prefix'=>'brand'], function (){
-        Route::resource('/', 'Admin\BrandController', ['names' => 'adminBrand']);
+
     });
 
     Route::group(['prefix'=>'supplier'], function (){
-        Route::resource('/', 'Admin\SupplierController', ['names' => 'adminSupplier']);
+
     });
 });
 
 // Route login
 Route::get('/admin', 'AdminController@index')->middleware('role:admin')->name('adminDashboard');
 Route::get('/', 'HomeController@index')->name('home');
-
+Route::get('test', 'Admin\ProductController@test');
 Auth::routes();
