@@ -2275,6 +2275,17 @@ __webpack_require__.r(__webpack_exports__);
     Pagination: _General_Pagination_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
   methods: {
+    // getCartProducts(){
+    //     axios.get('/cart-product-list')
+    //     .then( (response) => {
+    //         // handle success
+    //         this.carts = response.data;
+    //     })
+    //     .catch( (error) => {
+    //         // handle error
+    //         console.log(error);
+    //     })
+    // },
     caculateTotalPay: function caculateTotalPay() {
       this.totalPay = this.carts.reduce(function (sum, cart) {
         sum = sum + cart.price * cart.quantity;
@@ -2289,6 +2300,7 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     var _this = this;
 
+    // this.getCartProducts();
     this.caculateTotalPay();
     this.eventBus.$on('incQuantityCart', function (cart) {
       for (var i = 0; i < _this.carts.length; i++) {
@@ -2558,10 +2570,14 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      product_id: null
+    };
+  },
   props: ['product'],
   mounted: function mounted() {
-    console.log(this.$route.params);
-    console.log(this.props);
+    this.product_id = this.$route.params.product_id; // this.getDetailProduct(this.product_id);
   },
   components: {
     Banner: _General_Banner_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
@@ -2572,7 +2588,23 @@ __webpack_require__.r(__webpack_exports__);
     ProductViewed: _ProductViewed_vue__WEBPACK_IMPORTED_MODULE_7__["default"],
     Footer: _General_Footer_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
     ServiceList: _General_ServiceList_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
-  }
+  } // methods: {
+  //     getDetailProduct(product_id){
+  //         console.log(product_id)
+  //         axios.get('/detail-product', {
+  //             params: {
+  //             product_id: product_id
+  //             }
+  //         })
+  //         .then( (response) => {
+  //             console.log(response);
+  //         })
+  //         .catch((error) => {
+  //             console.log(error);
+  //         })
+  //     }
+  // }
+
 });
 
 /***/ }),
@@ -3048,6 +3080,7 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     var _this = this;
 
+    // this.getCartProducts();
     this.eventBus.$on('addToCart', function (product) {
       if (_this.carts.indexOf(product) !== -1) {
         _this.showAlertSuccessAddToCart();
@@ -3059,6 +3092,17 @@ __webpack_require__.r(__webpack_exports__);
     });
   },
   methods: {
+    // getCartProducts(){
+    //     axios.get('/cart-product-list')
+    //     .then( (response) => {
+    //         // handle success
+    //         this.carts = response.data;
+    //     })
+    //     .catch( (error) => {
+    //         // handle error
+    //         console.log(error);
+    //     })
+    // },
     showAlertSuccessAddToCart: function showAlertSuccessAddToCart() {
       this.isExist = true;
       this.eventBus.$emit('showAlertSuccessAddToCart', this.isExist);
@@ -3401,7 +3445,15 @@ __webpack_require__.r(__webpack_exports__);
   props: ['product'],
   methods: {
     addToCart: function addToCart(product) {
-      this.eventBus.$emit('addToCart', product);
+      this.eventBus.$emit('addToCart', product); // axios.post('/cart-product-list', {
+      //     product_id: product.id,
+      // })
+      // .then(function (response) {
+      //     console.log(response);
+      // })
+      // .catch(function (error) {
+      //     console.log(error);
+      // });
     }
   }
 });
@@ -3478,7 +3530,22 @@ __webpack_require__.r(__webpack_exports__);
   },
   components: {
     BestSalerProductItem: _BestSalerProductItem_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
-  }
+  } // mounted(){
+  //     this.getData();
+  // },
+  // methods: {
+  //     getData(){
+  //         axios.get('/api/getProduct-hot')
+  //         .then( (response) => {
+  //             console.log(response.data);
+  //         })
+  //         .catch( (error) => {
+  //             // handle error
+  //             console.log(error);
+  //         })
+  //     }
+  // }
+
 });
 
 /***/ }),
@@ -3842,7 +3909,22 @@ __webpack_require__.r(__webpack_exports__);
   },
   components: {
     NewProductItem: _NewProductItem_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
-  }
+  } // mounted(){
+  //     this.getData();
+  // },
+  // methods: {
+  //     getData(){
+  //         axios.get('/api/new-product')
+  //         .then( (response) => {
+  //             console.log(response.data);
+  //         })
+  //         .catch( (error) => {
+  //             // handle error
+  //             console.log(error);
+  //         })
+  //     }
+  // }
+
 });
 
 /***/ }),
@@ -3978,7 +4060,22 @@ __webpack_require__.r(__webpack_exports__);
   },
   components: {
     PromotionProductItem: _PromotionProductItem_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
-  }
+  } // mounted(){
+  //     this.getData();
+  // },
+  // methods: {
+  //     getData(){
+  //         axios.get('/api/getPromotionProduct')
+  //         .then( (response) => {
+  //             console.log(response.data);
+  //         })
+  //         .catch( (error) => {
+  //             // handle error
+  //             console.log(error);
+  //         })
+  //     }
+  // }
+
 });
 
 /***/ }),
@@ -4377,7 +4474,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n    /* Best Saler product List  */\n.best-saler-product-list[data-v-43bd12ca]{\n    padding-top: 40px;\n}\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n    /* Best Saler product List  */\n.best-saler-product-list[data-v-43bd12ca]{\n    padding-top: 40px;\n}\n", ""]);
 
 // exports
 
@@ -4473,7 +4570,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* New product List  */\n.new-product-list[data-v-0099f322]{\n    padding-top: 40px;\n}\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* New product List  */\n.new-product-list[data-v-0099f322]{\n    padding-top: 40px;\n}\n\n", ""]);
 
 // exports
 
@@ -4492,7 +4589,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n    /* Promotion product List */\n.promotion-product-list[data-v-3716a002]{\n    padding-top: 40px;\n}\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n    /* Promotion product List */\n.promotion-product-list[data-v-3716a002]{\n    padding-top: 40px;\n}\n", ""]);
 
 // exports
 
@@ -25661,9 +25758,8 @@ var render = function() {
                 name: "detail_product",
                 params: {
                   product_slug: this.rewriteUrl(_vm.product.name),
-                  product_id: "." + _vm.product.id
-                },
-                props: ["product"]
+                  product_id: _vm.product.id
+                }
               }
             }
           },
@@ -26218,9 +26314,8 @@ var render = function() {
                 name: "detail_product",
                 params: {
                   product_slug: this.rewriteUrl(_vm.product.name),
-                  product_id: "." + _vm.product.id
-                },
-                props: ["product"]
+                  product_id: _vm.product.id
+                }
               }
             }
           },
@@ -26398,9 +26493,8 @@ var render = function() {
                 name: "detail_product",
                 params: {
                   product_slug: this.rewriteUrl(_vm.product.name),
-                  product_id: "." + _vm.product.id
-                },
-                props: ["product"]
+                  product_id: _vm.product.id
+                }
               }
             }
           },

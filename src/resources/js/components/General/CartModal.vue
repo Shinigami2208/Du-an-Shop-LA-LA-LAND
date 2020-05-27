@@ -32,6 +32,7 @@ export default {
         CartModalItem
     },
     mounted(){
+        // this.getCartProducts();
         this.eventBus.$on('addToCart', (product) => {
             if(this.carts.indexOf(product) !== -1){
                 this.showAlertSuccessAddToCart();
@@ -42,6 +43,17 @@ export default {
         });
     },
     methods: {
+        // getCartProducts(){
+        //     axios.get('/cart-product-list')
+        //     .then( (response) => {
+        //         // handle success
+        //         this.carts = response.data;
+        //     })
+        //     .catch( (error) => {
+        //         // handle error
+        //         console.log(error);
+        //     })
+        // },
         showAlertSuccessAddToCart(){
             this.isExist = true;
             this.eventBus.$emit('showAlertSuccessAddToCart', this.isExist);

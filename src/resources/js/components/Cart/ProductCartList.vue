@@ -61,6 +61,17 @@ export default {
         Pagination,
     },
     methods: {
+        // getCartProducts(){
+        //     axios.get('/cart-product-list')
+        //     .then( (response) => {
+        //         // handle success
+        //         this.carts = response.data;
+        //     })
+        //     .catch( (error) => {
+        //         // handle error
+        //         console.log(error);
+        //     })
+        // },
         caculateTotalPay(){
             this.totalPay = this.carts.reduce((sum, cart)=>{
                 sum = sum + cart.price * cart.quantity;
@@ -73,6 +84,7 @@ export default {
         }
     },
     mounted(){
+        // this.getCartProducts();
         this.caculateTotalPay();
         this.eventBus.$on('incQuantityCart',(cart)=>{
             for(let i = 0; i < this.carts.length; i++){

@@ -34,10 +34,25 @@
             ],
         }
     },
-        components: {
-            NewProductItem
-        }
-    }
+    components: {
+        NewProductItem
+    },
+    // mounted(){
+    //     this.getData();
+    // },
+    // methods: {
+    //     getData(){
+    //         axios.get('/api/new-product')
+    //         .then( (response) => {
+    //             console.log(response.data);
+    //         })
+    //         .catch( (error) => {
+    //             // handle error
+    //             console.log(error);
+    //         })
+    //     }
+    // }
+}
 </script>
 
 <style scoped>

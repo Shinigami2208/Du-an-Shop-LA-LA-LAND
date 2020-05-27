@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="home-product-list-item">
-            <router-link :to="{name: 'detail_product', params: {product_slug: this.rewriteUrl(product.name), product_id: '.' + product.id}, props: ['product']}" class="router-link-to-product-detail">
+            <router-link :to="{name: 'detail_product', params: {product_slug: this.rewriteUrl(product.name), product_id:product.id}}" class="router-link-to-product-detail">
                 <img :src="product.src" alt="product" class="home-product-list-item-photo" >
             </router-link>
             <div class="contain-add-to-cart">
@@ -31,6 +31,15 @@ export default {
     methods: {
         addToCart(product){
             this.eventBus.$emit('addToCart', product);
+            // axios.post('/cart-product-list', {
+            //     product_id: product.id,
+            // })
+            // .then(function (response) {
+            //     console.log(response);
+            // })
+            // .catch(function (error) {
+            //     console.log(error);
+            // });
         }
     }
 }

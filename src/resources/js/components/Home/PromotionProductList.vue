@@ -34,7 +34,22 @@ export default {
     },
     components: {
         PromotionProductItem
-    }
+    },
+    // mounted(){
+    //     this.getData();
+    // },
+    // methods: {
+    //     getData(){
+    //         axios.get('/api/getPromotionProduct')
+    //         .then( (response) => {
+    //             console.log(response.data);
+    //         })
+    //         .catch( (error) => {
+    //             // handle error
+    //             console.log(error);
+    //         })
+    //     }
+    // }
 }
 </script>
 

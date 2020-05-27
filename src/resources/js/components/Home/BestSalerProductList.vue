@@ -32,7 +32,22 @@ export default {
     },
     components: {
         BestSalerProductItem
-    }
+    },
+    // mounted(){
+    //     this.getData();
+    // },
+    // methods: {
+    //     getData(){
+    //         axios.get('/api/getProduct-hot')
+    //         .then( (response) => {
+    //             console.log(response.data);
+    //         })
+    //         .catch( (error) => {
+    //             // handle error
+    //             console.log(error);
+    //         })
+    //     }
+    // }
 }
 </script>
 
