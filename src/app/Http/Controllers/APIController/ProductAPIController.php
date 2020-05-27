@@ -36,5 +36,21 @@ class ProductAPIController extends Controller
     public function getHotProduct(){
         $product = Product::withCount('stock')->where('stock_count', 'desc')->take(6)->get();
     }
+    /* lay chi tiet san pham */
+    public function getDetail(Request $request){
+        try {
+            $product = Product::where('id', $request->code)->first();
+            $reponse = Reponse::$succes;
+            $reponse['data'] = $product;
+            $reponse['image'] = $product->images;
+            header('Content-type:application/json');
+            return json_encode($reponse);
+        }catch (\Exception $exception){
+            $reponse = Reponse::$errors;
+            $reponse['message'] = 'loi he thong';
+            header('Content-type:application/json');
+            return json_encode($reponse);
+        }
+    }
 
 }
