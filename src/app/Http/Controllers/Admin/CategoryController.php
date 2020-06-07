@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use DB;
@@ -17,10 +18,8 @@ class CategoryController extends Controller
     public function index()
     {
         //
-        return view('admin.category.list',
-        [
-            'categories' => Category::all()
-        ]);
+        $categories = Category::paginate(3);
+        return view('admin.category.list', compact('categories'));
     }
 
     /**
@@ -31,7 +30,7 @@ class CategoryController extends Controller
     public function create()
     {
         //
-        return view('admin.category.create');
+        return view('Admin.Category.Create');
     }
 
     /**
@@ -44,7 +43,7 @@ class CategoryController extends Controller
     {
         //
         Category::Create($request->all());
-        return redirect()->route('adminCategory.index');
+        return redirect()->back()->with('messenger_success', ' Tạo danh mục thành công');
     }
 
     /**
@@ -67,12 +66,8 @@ class CategoryController extends Controller
     public function edit($id)
     {
         //
-        return view(
-            'admin.category.edit',
-            [
-                'category' => Category::findOrFail($id)
-            ]
-        );
+        $category =  Category::find($id);
+        return view('admin.category.ajax_Edit_Category', compact('category'));
     }
 
     /**
@@ -86,7 +81,7 @@ class CategoryController extends Controller
     {
         //
         Category::find($id)->update($request->all());
-        return redirect()->route('adminCategory.index');
+        return redirect()->back()->with('messenger_success', 'Bạn đã sửa danh mục thành công ');
     }
 
     /**
@@ -97,31 +92,37 @@ class CategoryController extends Controller
      */
     public function destroy(Request $request, $id)
     {
-        //
+        $category = Category::find($id);
+        $products = $category->products;
         try {
             DB::beginTransaction();
-            if($request->move_to_category != null){
-                // Move product to orther category
+            if($request->category != null){
+               foreach ($products as $product){
+                   $product->category_id = $request->category;
+                   $product->save();
+               }
             }else{
-                // Delete product
+               foreach ($products as $product){
+                   $product->delete();
+               }
             }
             Category::find($id)->delete();
             DB::commit();
-            return redirect()->route('adminCategory.index');
+            return redirect()->back()->with('messenger_success', 'xoa thanh cong');
         }
         catch( Throwable $e){
             DB::rollback();
-        }   
+        }
     }
 
-    public function deleteForm(Request $request, $id){
-        return view
-        (
-            'admin.category.delete', 
-            [
-                'categories' => Category::Where('id', '!=', $id)->get(),
-                'id' => $id
-            ]
-        );
+    public function deleteForm($id){
+        $name = Category::find($id)->name;
+        $categories = Category::where('id', '!=' , $id)->get();
+        return view('admin.category.ajax_delete_category', compact('categories', 'id','name'));
+    }
+    // ajax lay san pham cua danh muc
+    public function detail($id){
+        $products = Product::where('category_id',$id)->paginate(2);
+        return view('admin.category.ajax_detail_category', compact('products'));
     }
 }

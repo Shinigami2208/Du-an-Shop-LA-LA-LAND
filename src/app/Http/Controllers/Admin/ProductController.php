@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Comment;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Category;
@@ -61,20 +63,11 @@ class ProductController extends Controller
             'name' => $request->name,
             'brand_id' => $request->brand_id,
             'category_id' => $request->category_id,
-            'supplier_id' => $request->supplier_id,
             'unit_price' => $request->unit_price,
             'promotion_price' => $request->promotion_price,
             'description' => $request->description,
             'quality' => $request->quality,
         ]);
-
-        $stock = Stock::create([
-            'product_id' => $product->id,
-            'supplier_id' => $request->supplier_id,
-            'quality' => $request->quality,
-            'payment' => $request->unit_price*$request->quality,
-        ]);
-
         if($request->hasFile('image')){
             $file = $request->file('image');
             $name =time() . "-" . $file->getClientOriginalName();
@@ -85,7 +78,7 @@ class ProductController extends Controller
                 'image' => $name
             ]);
         }
-        return redirect()->back();
+        return redirect()->back()->with('messenger_success', 'Thêm hình ảnh thành công');
     }
 
     /**
@@ -126,7 +119,7 @@ class ProductController extends Controller
     public function update(ProductRequest $request, $id)
     {
         Product::find($id)->update($request->all());
-        return redirect()->back();
+        return redirect()->back()->with('messenger_success', 'Thêm hình ảnh thành công');
     }
 
     /**
@@ -139,11 +132,32 @@ class ProductController extends Controller
         $product = Product::find($request->id);
         $product->delete();
     }
+
     // lay chi tiet comment va hinh anh
+
     public function getCommentImage($id){
         $product = Product::find($id);
-        $comments = $product->comments;
-        $images = $product->images;
-        return view('admin.product.ajax_get_comment_image', compact('comments', 'images'));
+        $comments = Comment::where('product_id', $id)->paginate(5);
+        $images = Image::where('product_id', $id)->paginate(5);
+        return view('admin.product.ajax_detail_product', compact('comments', 'images', 'product'));
+    }
+    // them hinh anh cho san pham
+    public function addImage(Request $request, $id){
+        $validator =Validator::make($request->all(),[
+            'imageadd' => 'mimes:jpg,jpeg,png,gif'
+        ]);
+        if($validator->fails()){
+            return redirect()->back()->withErrors($validator);
+        }
+        $file = $request->file('imageadd');
+        $name =time() . "-" . $file->getClientOriginalName();
+        $path = public_path(config('image.imageProduct'));
+        $file->move($path,$name);
+        $image = Image::create([
+            'product_id' => $id,
+            'image' => $name
+        ]);
+        return redirect()->back()->with('messenger_success', 'Thêm hình ảnh thành công');
+
     }
 }

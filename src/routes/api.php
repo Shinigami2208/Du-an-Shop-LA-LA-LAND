@@ -14,8 +14,16 @@ use Illuminate\Http\Request;
 */
 
 Route::get('/new-product', 'APIController\ProductAPIController@newProduct');
+// lay san pham khuyen mai
 Route::get('getPromotionProduct', 'APIController\ProductAPIController@getPromotion');
+// lay san pham ban nhieu nhat
 Route::get('getProduct-hot', 'APIController\ProductAPIController@getHotProduct');
+// tim kiem san pham
+Route::post('search-product', 'APIPController\ProductAPIController@searchProduct');
+// lay chi tiet san pham
+Route::post('detail-product', 'APIController\ProductAPIController@detailProduct');
+//lay tat ca cac danh muc san pham
+Route::get('get-category', 'APIController\CategoryController@getCategory');
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });

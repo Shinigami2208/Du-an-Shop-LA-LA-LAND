@@ -8,9 +8,12 @@
 
 @section('content')
 <div class="row">
-    @if(session('messeger_errors'))
-        {{ session('messeger_errors') }}
+    @if(session('messenger_success'))
+        <div class="alert alert-primary">
+            {{ session('messenger_success') }}
+        </div>
     @endif
+
         <div class="modal-body">
             @if(count($errors))
                     @foreach($errors->all() as $error)
@@ -117,12 +120,13 @@
        }
        function detailProduct(button) {
             var url = button.getAttribute('data-url');
-            $.ajax({
-               url : url,
-               success : function (data) {
-                    $(".detail_product").html(data);
-               }
-            });
-       }
+
+                $.ajax({
+                    url : url,
+                    success : function (data) {
+                        $(".detail_product").html(data);
+                    }
+                });
+            }
    </script>
 @stop

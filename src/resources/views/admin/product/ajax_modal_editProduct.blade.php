@@ -58,25 +58,6 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="col-6">
-                            <div class="form-group">
-                                @if($errors->has('supplier_id'))
-                                    <div class="alert alert-danger">
-                                        {{ $errors->first('supplier_id') }}
-                                    </div>
-                                @endif
-                                <label>Nhà Cung Cấp</label>
-                                <select class="custom-select" name="supplier_id">
-                                    @foreach ($suppliers as $supplier)
-                                        <option
-                                            @if($product->supplier_id == $supplier->id)
-                                            selected
-                                            @endif
-                                            value="{{$supplier->id}}">{{$supplier->name}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
                     </div>
                     <div class="row">
                         <div class="col-6">

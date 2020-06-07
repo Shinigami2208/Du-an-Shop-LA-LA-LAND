@@ -16,10 +16,8 @@ class SupplierController extends Controller
     public function index()
     {
         //
-        return view('admin.supplier.list',
-        [
-            'suppliers' => Supplier::all(),
-        ]);
+        $suppliers = Supplier::paginate(5);
+        return view('admin.supplier.list', compact('suppliers'));
     }
 
     /**
@@ -42,7 +40,7 @@ class SupplierController extends Controller
     {
         //
         Supplier::Create($request->all());
-        return redirect()->route('adminSupplier.index');
+        return redirect()->back()->with('messenger_success', 'Bạn đã thêm nhà cung cấp thành công');
     }
 
     /**
@@ -65,6 +63,8 @@ class SupplierController extends Controller
     public function edit($id)
     {
         //
+        $supplier = Supplier::find($id);
+        return view('admin.supplier.ajax_edit_supplier',compact('supplier'));
     }
 
     /**
@@ -77,6 +77,15 @@ class SupplierController extends Controller
     public function update(Request $request, $id)
     {
         //
+        try {
+            $check = Supplier::find($id)->update($request->all());
+
+            return redirect()->back()->with('messenger_success', 'Bạn đã sửa nhà cung cấp thành công');
+
+        }catch (\Exception $err){
+            return redirect()->back()->with('messenger_errors', ' Hệ thống đang gặp vấn đề, mời bạn liên lạc qua : ');
+        }
+
     }
 
     /**
