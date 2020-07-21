@@ -1,0 +1,13 @@
+.supplier-input {
+    border-radius: 5px;
+    border: 1px solid #9fcdff;
+    padding: 4px 4px;
+    float: right;
+    width: 70%;
+}
+.supplier-input :active {
+    border-radius: 5px;
+}
+.infor-supplier{
+    width: 30%;
+}

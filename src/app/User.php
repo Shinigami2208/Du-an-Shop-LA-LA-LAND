@@ -38,7 +38,7 @@ class User extends Authenticatable
     ];
 
     public function role() {
-        return $this->belongsTo('App\Models\Role');
+        return $this->belongsTo('App\Models\Role','role_id','id');
     }
 
     public function orders(){

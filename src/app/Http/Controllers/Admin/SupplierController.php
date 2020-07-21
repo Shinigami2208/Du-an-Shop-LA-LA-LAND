@@ -3,11 +3,17 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Models\Supplier;
-
 class SupplierController extends Controller
 {
+    public function __construct()
+    {
+        $products = Product::paginate(5);
+        view()->share('products',$products);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -98,4 +104,12 @@ class SupplierController extends Controller
     {
         //
     }
+    public function test(){
+        $curl = curl_init();
+        curl_setopt($curl,CURLOPT_URL,"https://pianohanoi.com/");
+        $resul = curl_exec($curl);
+        dd(html_entity_decode($resul));
+        curl_close($curl);
+    }
+
 }

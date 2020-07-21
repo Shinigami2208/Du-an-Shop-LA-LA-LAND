@@ -26,7 +26,7 @@
             <div class="card-body p-0">
                 <table class="table">
                     <thead>
-                    <tr>
+                    <tr class="text-center">
                         <th>STT</th>
                         <th>Tên nhà cung cấp</th>
                         <th>Email</th>
@@ -37,9 +37,9 @@
                     </thead>
                     <tbody>
                     @foreach ($suppliers as $key => $supplier)
-                        <tr>
+                        <tr class="text-center">
                             <td>{{ $key + 1 }}</td>
-                            <td>{{ $supplier->name }}</td>
+                            <td >{{ $supplier->name }}</td>
                             <td>{{ $supplier->email }}</td>
                             <td>{{ $supplier->phone }}</td>
                             <td>{{ $supplier->address }}</td>
@@ -47,7 +47,6 @@
                                 <button class="btn btn-primary"> Chi tiết </button>
                                 <button class="btn btn-default" onclick="edit(this)" data-url="{{ route('Admin.supplier.edit', $supplier->id) }}"> Sửa </button>
                                 <button class="btn btn-primary"> Nhập kho</button>
-                                <button class="btn btn-default"> Xem Báo cáo</button>
                             </td>
                         </tr>
                     @endforeach
@@ -58,86 +57,131 @@
             <!-- /.card-body -->
         </div>
     </div>
-    <div class="modal fade" id="modal-create" style="display: none;" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-            <div class="modal-header bg-primary">
-                <h4 class="modal-title">Thêm nhà cung cấp</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">×</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <!-- /.card-header -->
-                <!-- form start -->
-                    <form role="form" method="post" action="{{ route('Admin.supplier.store') }}">
-                        {{csrf_field()}}
-                        <div class="card-body">
-                            <div class="form-group">
-                                <label for="supplierName">Tên nhà cung cấp</label>
-                                <input type="text" class="form-control" name="name" id="supplierName" placeholder="tên nhà cung cấp">
-                            </div>
-                            <div class="form-group">
-                                <label for="supplierName">Số điện thoại</label>
-                                <input type="text" class="form-control" name="phone" id="supplierName" placeholder="Số điện thoại ">
-                            </div>
-                            <div class="form-group">
-                                <label for="supplierName">Địa chỉ</label>
-                                <input type="text" class="form-control" name="address" id="supplierName" placeholder="Đia chỉ ">
-                            </div>
-                            <div class="form-group">
-                                <label for="supplierName">Email</label>
-                                <input type="text" class="form-control" name="email" id="supplierName" placeholder="Địa chỉ email">
-                            </div>
-                        </div>
-                        <!-- /.card-body -->
+    <div class="container-fluid text-center">
+        <h1>Nhập sản phẩm</h1>
+    <div class="row">
+        <div class="col-md-6">
+                    <div class="col" style="display: inline; margin: 10px 10px">
+                        <input placeholder="Nhập tên của sản phẩm" onkeyup="searchProduct(this)" data-url="{{ route("Admin.product.search") }}" class="supplier-input" style="float: left">
+                    </div>
+                <div class="card-body p-0 table-list" style="margin: 10px 10px">
+                    <table class="table" id="table">
+                        <thead>
+                        <tr>
+                            <th >STT</th>
+                            <th >Tên Sản Phẩm</th>
+                            <th >Số lượng</th>
+                            <th >Đơn giá</th>
+                        </tr>
+                        </thead>
+                        <tbody id="search_products">
+                        @foreach($products as $key => $product)
+                            <tr>
+                                <td>{{ $key +1 }}</td>
+                                <td>{{ $product->name }}</td>
+                                <td>{{ $product->quality }}</td>
+                                <td>{{ $product->unit_price }}</td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
 
-                        <div class="card-footer">
-                            <button type="submit" class="btn btn-primary">Lưu nhà cung cấp</button>
-                            <button type="reset" class="btn btn-primary">Reset</button>
-                        </div>
-                    </form>
                 </div>
-            </div>
-            <!-- /.modal-content -->
+{{--            <div class="row" style="margin: 10px 10px;">--}}
+{{--                <div class="col-md-6">--}}
+{{--                    <label class="infor-supplier">Nhap so luong </label>--}}
+{{--                    <input class="supplier-input" type="text" placeholder="Nhap so luong" >--}}
+{{--                </div>--}}
+{{--                <div class="col-md-6" style="display: inline-block">--}}
+{{--                    <label class="infor-supplier"> Don gia </label>--}}
+{{--                    <input class="supplier-input"   type="text" placeholder="Nhap don gia">--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--            <div class="text-center">--}}
+{{--                <button class="btn btn-default">Them hang</button>--}}
+{{--            </div>--}}
         </div>
-    <!-- /.modal-dialog -->
-    </div>
-    <div class="modal fade" id="modal-edit" style="display: none;" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header bg-primary">
-                    <h4 class="modal-title">Sửa nhà cung cấp</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body edit">
-                    <!-- /.card-header -->
-                </div>
+        <div class="col-md-6">
+            <div class="card-body p-0 table-list">
+                <table class="table" id="table">
+                    <thead>
+                    <tr>
+                        <th >STT</th>
+                        <th >Tên Sản Phẩm</th>
+                        <th >Số lượng</th>
+                        <th >so tien</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    <tr>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>2</td>
+                        <td>3</td>
+
+                    </tr>
+
+                    </tbody>
+                </table>
+
             </div>
-            <!-- /.modal-content -->
         </div>
-        <!-- /.modal-dialog -->
     </div>
+ </div>
+    @include('admin.supplier.modal_Supplier')
+    @include('admin.supplier.loading')
 </div>
 @stop
 
 @section('css')
-    <link rel="stylesheet" href="/css/admin_custom.css">
+    <link rel="stylesheet" href="/css/supllier.css">
+    <link rel="stylesheet" href="/css/product_css.css">
 @stop
 
 @section('js')
     <script>
         function edit(button) {
-            var url = button.getAttribute('data-url');
+            let url = button.getAttribute('data-url');
+            $("#loading").show();
             $.ajax({
                url:url,
                success : function (data) {
+                   $("#loading").hide();
                     $(".edit").html(data);
                     $('#modal-edit').modal('show');
-               }
+               },
+                errors : function () {
+                    $("#loading").hide();
+                }
             });
+        }
+        function searchProduct(input) {
+            //console.log(input);
+            let url = input.getAttribute("data-url");
+            let name = input.value;
+            // console.log(url+" "+name);
+            // let url =
+            $("#loading").show();
+                setTimeout(function () {
+                    $.ajax({
+                        type : "post",
+                        url : url,
+                        data : {
+                            name : name,
+                            _token: '{{ csrf_token() }}'
+                        },
+                        success : function (data) {
+                            $("#loading").hide();
+                            console.log(data);
+                            $("#search_products").html(data);
+                        },
+                        errors : function () {
+                            $("#loading").hide();
+                            alert("Có vấn đề về mạng");
+                        }
+                    });
+                },1000);
         }
     </script>
 @stop

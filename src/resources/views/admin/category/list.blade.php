@@ -50,6 +50,7 @@
             </div>
         </div>
     @include('admin.category.modal_category')
+    @include('admin.product.loading')
     </div>
     <div class="container-fluid" id="detail">
 
@@ -57,30 +58,37 @@
 @stop
 
 @section('css')
-
+    <link rel="stylesheet" href="{{ asset('/css/product_css.css') }}">
 @stop
 
 @section('js')
     <script>
         function edit(button) {
-            var url = button.getAttribute('data-url');
+            let url = button.getAttribute('data-url');
+            $("#loading").show();
             $.ajax({
                url : url,
                success : function (data) {
+                   $("#loading").hide();
                     var x = $('#Edit').html(data);
                     if(x){
                         $('#modal-edit').modal('show');
                     }
-               }
+               },
+                error : function () {
+                    $("#loading").hide();
+                }
             });
         }
 
         function deleteCategory(button) {
-            var url = button.getAttribute('data-url');
+            let url = button.getAttribute('data-url');
+            $("#loading").show();
             $.ajax({
                 url : url,
                 success : function (data) {
-                    var x = $('#delete').html(data);
+                    $("#loading").hide();
+                    let x = $('#delete').html(data);
                     if(x){
                         $('#modal-delete').modal('show');
                     }
@@ -88,11 +96,13 @@
             })
         }
         function detail(button) {
-            var url = button.getAttribute('data-url');
+            let url = button.getAttribute('data-url');
+            $("#loading").show();
             setTimeout(function () {
                 $.ajax({
                     url : url,
                     success : function (data) {
+                        $("#loading").hide();
                         $('#detail').html(data);
                     }
                 });
@@ -102,12 +112,13 @@
                 // lang nghe khi co click vi paginate category co cung dia chi. phai them id o detail
                 $('#detail-product .pagination li a').click(function(e) {
                     // giu nguyen trang thai
+                    $("#loading").show();
                     e.preventDefault();
-                    var url = $(this).attr('href');20011998
-
+                    let url = $(this).attr('href');
                     $.ajax({
                         url: url,
                         success: function(data) {
+                            $("#loading").hide();
                             $("#detail").html(data);
                         }
                     });

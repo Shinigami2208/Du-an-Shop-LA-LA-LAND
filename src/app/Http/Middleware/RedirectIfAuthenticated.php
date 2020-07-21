@@ -24,7 +24,7 @@ class RedirectIfAuthenticated
             }else{
                 return redirect(RouteServiceProvider::AMDIN);
             }
-            
+
         }
 
         return $next($request);

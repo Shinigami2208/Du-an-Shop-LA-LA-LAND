@@ -14,6 +14,7 @@ use App\Models\Stock;
 use App\Http\Requests\ProductRequest;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Image;
+use Illuminate\Validation\Rules\Exists;
 
 class ProductController extends Controller
 {
@@ -59,26 +60,29 @@ class ProductController extends Controller
     public function store(ProductRequest $request)
     {
         //
-        $product = Product::Create([
-            'name' => $request->name,
-            'brand_id' => $request->brand_id,
-            'category_id' => $request->category_id,
-            'unit_price' => $request->unit_price,
-            'promotion_price' => $request->promotion_price,
-            'description' => $request->description,
-            'quality' => $request->quality,
-        ]);
-        if($request->hasFile('image')){
-            $file = $request->file('image');
-            $name =time() . "-" . $file->getClientOriginalName();
-            $path = public_path('/images/product');
-            $file->move($path,$name);
-            $image = Image::create([
-                'product_id' => $product->id,
-                'image' => $name
+//        for($i = 0; $i<10; $i++) {
+            $product = Product::Create([
+                'name' => $request->name,
+                'brand_id' => $request->brand_id,
+                'category_id' => $request->category_id,
+                'unit_price' => $request->unit_price,
+                'promotion_price' => $request->promotion_price,
+                'description' => $request->description,
+                'quality' => 0,
             ]);
-        }
-        return redirect()->back()->with('messenger_success', 'Thêm hình ảnh thành công');
+            if ($request->hasFile('image')) {
+                $file = $request->file('image');
+                $name = time() . "-" . $file->getClientOriginalName();
+                $path = public_path(config('image.imageProduct'));
+                $file->move($path, $name);
+                chmod($path . $name, 0777);
+                $image = Image::create([
+                    'product_id' => $product->id,
+                    'image' => $name
+                ]);
+            }
+       // }
+        return redirect()->back()->with('messenger_success', 'Thêm sản phẩm thành công');
     }
 
     /**
@@ -130,6 +134,14 @@ class ProductController extends Controller
      */
     public function deleteForm(Request $request){
         $product = Product::find($request->id);
+        $path =public_path(config('image.imageProduct'));
+        if(count($product->images)){
+            foreach ($product->images as $image){
+                    @unlink($path . $image->image);
+                    //  clearstatcache();
+                    $image->delete();
+            }
+        }
         $product->delete();
     }
 
@@ -139,7 +151,8 @@ class ProductController extends Controller
         $product = Product::find($id);
         $comments = Comment::where('product_id', $id)->paginate(5);
         $images = Image::where('product_id', $id)->paginate(5);
-        return view('admin.product.ajax_detail_product', compact('comments', 'images', 'product'));
+        $configs = config('image.imageProduct');
+        return view('admin.product.ajax_detail_product', compact('comments', 'images', 'product','configs'));
     }
     // them hinh anh cho san pham
     public function addImage(Request $request, $id){
@@ -153,11 +166,26 @@ class ProductController extends Controller
         $name =time() . "-" . $file->getClientOriginalName();
         $path = public_path(config('image.imageProduct'));
         $file->move($path,$name);
+        chmod($path.$name,0777);
         $image = Image::create([
             'product_id' => $id,
             'image' => $name
         ]);
-        return redirect()->back()->with('messenger_success', 'Thêm hình ảnh thành công');
+        return redirect()->back()->with(['messenger_success'=>'Thêm hình ảnh thành công','detail_id'=>$id]);
+    }
+    /* tim kiem san pham */
+    public function searchProduct(Request $request){
+        $products = Product::where('name',"LIKE","%$request->name%")->paginate(5);
+        return view('admin.supplier.ajax_search_product', compact('products'));
+    }
+    /* tim kiem san pham chi tiet o muc san pham */
+    public function searchProduct2(Request $request) {
+        $products = Product::where('name',"LIKE","%$request->name%")->paginate(5);
+        return view('admin.product.ajax_search_product', compact('products'));
+    }
 
+    public function test(){
+        $product = Product::find(10);
+        dd($product->images);
     }
 }

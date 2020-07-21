@@ -24,38 +24,41 @@
             @foreach($images as $image)
             <tr>
                 <td><?php echo $i; $i++; ?></td>
-                <td><img src="{{ config('image.imageProduct') . $image->image }}"></td>
+                <td>
+                    <img width="250px" height="250px" src="{{ config('image.imageProduct') . $image->image }}">
+                </td>
             </tr>
             @endforeach
             </tbody>
         </table>
-            <div class="text-center">{{ $images->appends('page')->links() }}</div>
+            <div class="text-center " id ="detail">{{ $images->appends('page')->links() }}</div>
     </div>
     @endif
     @if(count($comments) > 0)
         <div class="col-md-6">
-        <table class="table">
-            <thead>
-            <tr>
-                <th >STT</th>
-                <th>Người dùng</th>
-                <th >Bình luận</th>
-            </tr>
-            </thead>
-            <tbody>
-            <?php $i = 1;?>
-            @foreach($comments as $comment)
+            <table class="table">
+                <thead>
                 <tr>
-                    <td><?php echo $i; $i++; ?></td>
-                    <td>{{ $comment->user->name }}</td>
-                    <td >{{ $comment->content }}</td>
+                    <th >STT</th>
+                    <th>Người dùng</th>
+                    <th >Bình luận</th>
                 </tr>
-            @endforeach
+                </thead>
+                <tbody>
+                <?php $i = 1;?>
+                @foreach($comments as $comment)
+                    <tr>
+                        <td><?php echo $i; $i++; ?></td>
+                        <td>{{ $comment->user->name }}</td>
+                        <td >{{ $comment->content }}</td>
+                    </tr>
+                @endforeach
 
-            </tbody>
-        </table>
+                </tbody>
+            </table>
             <div class="text-center">{{ $comments->appends('page')->links() }}</div>
-    </div>
+        </div>
+
     @endif
 </div>
 @else
@@ -88,4 +91,5 @@
         <button type="submit" class="btn btn-primary">Thêm hình ảnh</button>
     </div>
 </form>
+    {{ $configs }}
 </div>

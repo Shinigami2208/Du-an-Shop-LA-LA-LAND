@@ -70,7 +70,7 @@
 
 @if (config('adminlte.use_route_url', false))
     @php( $login_url = $login_url ? route($login_url) : '' )
-    @php( $register_url = $register_url ? route($register_url) : '' )
+    @php( $register_url = $register_url ?     route($register_url) : '' )
     @php( $password_reset_url = $password_reset_url ? route($password_reset_url) : '' )
     @php( $dashboard_url = $dashboard_url ? route($dashboard_url) : '' )
 @else
@@ -150,14 +150,6 @@
                                     </button>
                                 </div>
                             </div>
-                            <!-- <div class="row">
-                                <div class="col-8">
-                                    <div class="icheck-primary">
-                                        <input type="checkbox" name="remember" id="remember">
-                                        <label for="remember">{{ __('adminlte::adminlte.remember_me') }}</label>
-                                    </div>
-                                </div>
-                            </div> -->
                         </form>
                         @if ($password_reset_url)
                             <p class="mt-2 mb-1">

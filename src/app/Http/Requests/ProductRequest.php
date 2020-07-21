@@ -30,7 +30,6 @@ class ProductRequest extends FormRequest
             'unit_price' => 'required|numeric',
             'promotion_price' =>'required|numeric',
             'description' => 'required',
-            'quality' => 'required|numeric',
             'image' => 'image|mimes:jpg,jpeg,png,gif'
         ];
     }
@@ -51,7 +50,6 @@ class ProductRequest extends FormRequest
             'unit_price' => 'Giá bán sản phẩm',
             'promotion_price' => 'Giá khuyến mại sản phẩm',
             'description' => 'Mô tả sản phẩm',
-            'quality' => 'số lượng',
             'image' => 'Hình ảnh'
         ];
     }

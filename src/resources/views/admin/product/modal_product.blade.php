@@ -77,17 +77,6 @@
                             </div>
                             <div class="col-6">
                                 <div class="form-group">
-                                    @if($errors->has('quality'))
-                                        <div class="alert alert-danger">
-                                            {{ $errors->first('quality') }}
-                                        </div>
-                                    @endif
-                                    <label for="promotion_price">So luong</label>
-                                    <input type="text" class="form-control" name="quality" id="promotion_price" placeholder="Số lượng ..">
-                                </div>
-                            </div>
-                            <div class="col-6">
-                                <div class="form-group">
                                     @if($errors->has('image'))
                                         <div class="alert alert-danger">
                                             {{ $errors->first('image') }}
@@ -137,3 +126,4 @@
         <!-- /.modal-content -->
     </div>
 </div>
+

@@ -17,7 +17,7 @@ class Product extends Model
         'promotion_price'
         ];
     public function category(){
-        return $this->belongsTo('App\Models\Category','category_id','id');
+        return $this->belongsTo('app\Models\Category','category_id','id');
     }
 
     public function comments(){
@@ -25,7 +25,7 @@ class Product extends Model
     }
 
     public function images(){
-        return $this->hasMany('App\Models\Image');
+        return $this->hasMany('App\Models\Image','product_id','id');
     }
 
     public function stock(){

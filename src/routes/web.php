@@ -60,6 +60,10 @@ Route::group(['prefix'=>'admin'], function (){
         Route::post('/delete', 'Admin\ProductController@deleteForm')->name('Admin.product.delete');
         // them hinh anh cho san pham
         Route::post('/add/image/{id}', 'Admin\ProductController@addImage')->name('Admin.product.addimage');
+        // tim kiem san pham cho muc nha cung cap de them du lieu
+        Route::post('/search/product', 'Admin\ProductController@searchProduct')->name('Admin.product.search');
+        // tim kiem san pham cho muc san pham
+        Route::post('/search/productV2','Admin\ProductController@searchProduct2')->name('Admin.product.search2');
 
     });
     //hinh anh
@@ -85,5 +89,4 @@ Route::group(['prefix'=>'admin'], function (){
 // Route login
 Route::get('/admin', 'AdminController@index')->middleware('role:admin')->name('adminDashboard');
 Route::get('/', 'HomeController@index')->name('home');
-Route::get('test', 'Admin\ProductController@test');
 Auth::routes();

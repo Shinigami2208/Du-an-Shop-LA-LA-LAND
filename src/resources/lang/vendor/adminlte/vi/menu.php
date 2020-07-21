@@ -12,12 +12,12 @@ return [
     'product_list'                  => 'Danh sách sản phẩm',
     'product_create'                => 'Tạo sản phẩm mới',
 
-    'order_list'  => 'Quản lý đơn hàng',
-    'stock_list'  => 'Quản lý kho hàng',
-    'revenue' => 'Biểu đồ doanh thu',
-    'brand_list' => 'Danh sách thương hiệu',
-    'supplier_list' => 'Danh sách nhà cung cấp',
-    'image_list'  => 'Quản lý hình ảnh',
+    'order_list'                    => 'Quản lý đơn hàng',
+    'stock_list'                    => 'Quản lý kho hàng',
+    'revenue'                       => 'Biểu đồ doanh thu',
+    'brand_list'                    => 'Danh sách thương hiệu',
+    'supplier_list'                 => 'Danh sách nhà cung cấp',
+    'image_list'                    => 'Quản lý hình ảnh',
 
     'account_settings'              => 'Cài Đặt Hồ Sơ',
     'profile'                       => 'Thông tin tài khoản',
@@ -27,7 +27,7 @@ return [
     'main_navigation'               => 'ĐIỀU HƯỚNG CHÍNH',
     'blog'                          => 'Blog',
     'pages'                         => 'Trang',
-    
+
     'multilevel'                    => 'Đa cấp',
     'level_one'                     => 'Cấp độ 1',
     'level_two'                     => 'Cấp độ 2',
